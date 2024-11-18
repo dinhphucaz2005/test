@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.test.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.test.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_image"
+            app:destination="@id/navigation_image" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_weight"
+            app:destination="@id/navigation_weight" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_time"
+            app:destination="@id/navigation_time" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_location"
+            app:destination="@id/navigation_location" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_contact"
+            app:destination="@id/navigation_contact" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_accessibility"
+            app:destination="@id/navigation_accessibility" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_category"
+            app:destination="@id/navigation_category" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_image"
+        android:name="com.example.test.ui.dashboard.ImageFragment"
+        android:label="Image"
+        tools:layout="@layout/fragment_image" />
+
+    <fragment
+        android:id="@+id/navigation_weight"
+        android:name="com.example.test.ui.dashboard.WeightFragment"
+        android:label="Weight"
+        tools:layout="@layout/fragment_weight" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.test.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_time"
+        android:name="com.example.test.ui.dashboard.TimeFragment"
+        android:label="Time"
+        tools:layout="@layout/fragment_time" />
+
+    <fragment
+        android:id="@+id/navigation_location"
+        android:name="com.example.test.ui.dashboard.LocationFragment"
+        android:label="Location"
+        tools:layout="@layout/fragment_location" />
+
+    <fragment
+        android:id="@+id/navigation_contact"
+        android:name="com.example.test.ui.dashboard.ContactFragment"
+        android:label="Contact"
+        tools:layout="@layout/fragment_contact" />
+
+    <fragment
+        android:id="@+id/navigation_accessibility"
+        android:name="com.example.test.ui.dashboard.AcessibilityFragment"
+        android:label="Accessibility"
+        tools:layout="@layout/fragment_acessibility" />
+
+    <fragment
+        android:id="@+id/navigation_category"
+        android:name="com.example.test.ui.dashboard.CategoryFragment"
+        android:label="Categories"
+        tools:layout="@layout/fragment_category" />
+
+</navigation>
