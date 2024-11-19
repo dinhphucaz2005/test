@@ -1,5 +1,6 @@
 package com.example.test.ui.dashboard;
 
+import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,8 +34,15 @@ public class DashboardFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("SetTextI18n")
     private void observerData() {
-        dashboardViewModel.getAccessibility().observe(getViewLifecycleOwner(), binding.tvAccessibility::setText);
+        dashboardViewModel.getArticle().observe(getViewLifecycleOwner(), article -> {
+            binding.tvAccessibility.setText(article.getAccessibility());
+            binding.tvWeight.setText("Khối lương: " + article.getWeightKgs());
+            binding.tvTime.setText("Thời gian thu gom: " + article.getDate());
+            binding.tvLocation.setText("Địa chỉ: " + article.getLocation());
+            binding.tvPhoneNumber.setText("Liên hệ: " + article.getPhoneNumber());
+        });
     }
 
     boolean isKeyboardShowing = false;
@@ -70,42 +78,22 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
 
-        binding.tvAccessibility.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_navigation_dashboard_to_navigation_accessibility);
-        });
+        binding.tvAccessibility.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_accessibility));
 
-        binding.tvCategories.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_navigation_dashboard_to_navigation_category);
-        });
+        binding.tvCategories.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_category));
 
-        binding.btnImageAndVideo.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_navigation_dashboard_to_navigation_image);
-        });
+        binding.btnImageAndVideo.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_image));
 
-        binding.btnWeight.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_navigation_dashboard_to_navigation_weight);
-        });
+        binding.btnWeight.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_weight));
 
-        binding.btnTime.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_navigation_dashboard_to_navigation_time);
-        });
+        binding.btnTime.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_time));
 
-        binding.btnLocation.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_navigation_dashboard_to_navigation_location);
-        });
+        binding.btnLocation.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_location));
 
-        binding.btnContact.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_navigation_dashboard_to_navigation_contact);
-        });
+        binding.btnContact.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_contact));
 
-
+        binding.btnUpload.setOnClickListener(view -> dashboardViewModel.upload());
     }
 }

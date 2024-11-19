@@ -58,6 +58,7 @@
             android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/btn_select_image"
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:layout_gravity="center_horizontal"

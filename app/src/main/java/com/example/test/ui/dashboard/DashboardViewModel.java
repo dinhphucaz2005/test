@@ -1,91 +1,68 @@
 package com.example.test.ui.dashboard;
 
-import android.widget.LinearLayout;
+import android.net.Uri;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.List;
+import java.util.Objects;
 
 public class DashboardViewModel extends ViewModel {
 
-    private String title;
-    private String weight;
-    private String date;
-    private String dateDescription;
-    private String phoneNumber;
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+    private final MutableLiveData<Article> _article = new MutableLiveData<>(new Article());
+
 
     public void setTitle(String title) {
-        this.title = title;
+        Objects.requireNonNull(_article.getValue()).setTitle(title);
     }
 
-    public void setWeight(String weight) {
-        this.weight = weight;
+    public void setWeight(int weight) {
+        Objects.requireNonNull(_article.getValue()).setWeightKgs(weight);
     }
 
     private void setDate(String date) {
-        this.date = date;
+        Objects.requireNonNull(_article.getValue()).setDate(date);
     }
 
     private void setDateDescription(String dateDescription) {
-        this.dateDescription = dateDescription;
+        Objects.requireNonNull(_article.getValue()).setDateDescription(dateDescription);
     }
 
-    private final MutableLiveData<String> aPublic = new MutableLiveData<>(AcessibilityFragment.PUBLIC_ACCESSIBILITY);
-
-    public LiveData<String> getAccessibility() {
-        return aPublic;
-    }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        Objects.requireNonNull(_article.getValue()).setPhoneNumber(phoneNumber);
     }
 
-    public void setAccessibility(String aPublic) {
-        this.aPublic.setValue(aPublic);
+    public void setAccessibility(String accessibility) {
+        Objects.requireNonNull(_article.getValue()).setAccessibility(accessibility);
     }
 
-    public void changeCategory(Category item) {
-        for (Category category : categories)
-            category.setTicked(category.getName().equals(item.getName()));
+    public void upload() {
+
     }
 
+    private final List<String> categories = List.of("Sống xanh", "Hành động xanh", "Lối sống xanh", "Phân loại rác", "Tặng đồ cũ", "Tặng đồ ăn");
 
-    public static class Category {
-
-        private final String name;
-        private boolean isTicked = false;
-
-
-        Category(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public boolean isTicked() {
-            return isTicked;
-        }
-
-        public void setTicked(boolean ticked) {
-            isTicked = ticked;
-        }
-    }
-
-    private final List<Category> categories = List.of(
-            new Category("Sống xanh"),
-            new Category("Hành động xanh"),
-            new Category("Lối sống xanh"),
-            new Category("Phân loại rác"),
-            new Category("Tặng đồ cũ"),
-            new Category("Tặng đồ ăn")
-    );
-
-    public List<Category> getCategories() {
+    public List<String> getCategories() {
         return categories;
+    }
+
+    public LiveData<Article> getArticle() {
+        return _article;
+    }
+
+    public void addSelectedImages(List<Uri> selectedImages) {
+        Log.d("FATAL", "addSelectedImages: " + selectedImages.toString());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.test.ui.dashboard;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,33 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemViewHolder> {
 
-    private final List<DashboardViewModel.Category> itemList;
+    public static class Item {
+        private final String name;
+        private boolean ticked;
 
-    public CategoryAdapter(List<DashboardViewModel.Category> itemList) {
-        this.itemList = itemList;
+        public Item(String name, boolean ticked) {
+            this.name = name;
+            this.ticked = ticked;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setTicked(boolean ticked) {
+            this.ticked = ticked;
+        }
+
+        public boolean isTicked() {
+            return ticked;
+        }
+    }
+
+    private final List<Item> itemList;
+
+    @SuppressLint("NewApi")
+    public CategoryAdapter(List<String> itemList) {
+        this.itemList = itemList.stream().map(name -> new Item(name, false)).toList();
     }
 
     @NonNull
@@ -31,17 +55,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        DashboardViewModel.Category item = itemList.get(position);
+        Item item = itemList.get(position);
 
         holder.textView.setText(item.getName());
         holder.checkbox.setChecked(item.isTicked());
 
         holder.itemView.setOnClickListener(v -> {
+            item.setTicked(!item.isTicked());
+            holder.checkbox.setChecked(item.isTicked());
         });
 
-        holder.checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            item.setTicked(isChecked);
-        });
+        holder.checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> item.setTicked(isChecked));
     }
 
     @Override
@@ -56,7 +80,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemVi
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            // Sử dụng findViewById để ánh xạ các view
             textView = itemView.findViewById(R.id.text_view);
             checkbox = itemView.findViewById(R.id.checkbox);
         }

@@ -1,5 +1,9 @@
 package com.example.test.ui.dashboard;
 
+import static com.example.test.ui.dashboard.Article.PRIVATE_ACCESSIBILITY;
+import static com.example.test.ui.dashboard.Article.PUBLIC_ACCESSIBILITY;
+import static com.example.test.ui.dashboard.Article.RESTRICTED_ACCESSIBILITY;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,9 +20,7 @@ import com.example.test.databinding.FragmentAcessibilityBinding;
 
 public class AcessibilityFragment extends Fragment {
 
-    static final String PUBLIC_ACCESSIBILITY = "Tất cả kết nối";
-    static final String RESTRICTED_ACCESSIBILITY = "Chỉ bạn bè";
-    static final String PRIVATE_ACCESSIBILITY = "Mình bạn";
+
 
     FragmentAcessibilityBinding binding;
     DashboardViewModel dashboardViewModel;
