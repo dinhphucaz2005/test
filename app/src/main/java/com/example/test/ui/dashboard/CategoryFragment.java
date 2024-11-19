@@ -28,11 +28,19 @@ public class CategoryFragment extends Fragment {
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
 
-        adapter = new CategoryAdapter(dashboardViewModel.getCategories());  // Gán listener ở đây
+        adapter = new CategoryAdapter(dashboardViewModel.getCategories());
 
         binding.recyclerView.setAdapter(adapter);
+        setEvents();
 
         return binding.getRoot();
+    }
+
+    private void setEvents() {
+        binding.btnFinish.setOnClickListener(v -> {
+            dashboardViewModel.setCategory(adapter.getSelectedCategory());
+            requireActivity().finish();
+        });
     }
 
 }

@@ -64,4 +64,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-storage:21.0.1")
 
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 }

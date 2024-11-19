@@ -32,6 +32,7 @@ public class WeightFragment extends Fragment {
     private void setEvent() {
         binding.btnFinish.setOnClickListener(view -> {
             dashboardViewModel.setWeight(Integer.parseInt(binding.editTextWeight.getText().toString()));
+            requireActivity().onBackPressed();
         });
     }
 }

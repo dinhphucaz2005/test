@@ -71,5 +71,17 @@
 
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_finish"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/finish_button_bg"
+        android:text="Hoàn tất"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        tools:ignore="HardcodedText" />
+
 
 </LinearLayout>
