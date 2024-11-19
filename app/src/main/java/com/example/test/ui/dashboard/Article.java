@@ -1,5 +1,9 @@
 package com.example.test.ui.dashboard;
 
+import androidx.media3.common.C;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Article {
@@ -25,9 +29,9 @@ public class Article {
         this.userId = "";
         this.title = "";
         this.accessibility = PUBLIC_ACCESSIBILITY;
-        this.categories = List.of();
-        this.otherCategories = List.of();
-        this.imageUrls = List.of();
+        this.categories = new ArrayList<>();
+        this.otherCategories = new ArrayList<>();
+        this.imageUrls = new ArrayList<>();
         this.weightKgs = 0;
         this.date = "";
         this.dateDescription = "";
@@ -87,7 +91,8 @@ public class Article {
     }
 
     public void setCategories(List<String> categories) {
-        this.categories = categories;
+        this.categories.clear();
+        this.categories.addAll(categories);
     }
 
     public List<String> getOtherCategories() {

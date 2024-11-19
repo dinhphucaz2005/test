@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -39,7 +41,8 @@ public class CategoryFragment extends Fragment {
     private void setEvents() {
         binding.btnFinish.setOnClickListener(v -> {
             dashboardViewModel.setCategory(adapter.getSelectedCategory());
-            requireActivity().finish();
+            NavController navController = Navigation.findNavController(v);
+            navController.popBackStack();
         });
     }
 

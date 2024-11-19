@@ -42,16 +42,19 @@ public class DashboardFragment extends Fragment {
             binding.tvTime.setText("Thời gian thu gom: " + article.getDate());
             binding.tvLocation.setText("Địa chỉ: " + article.getLocation());
             binding.tvPhoneNumber.setText("Liên hệ: " + article.getPhoneNumber());
+            StringBuilder categories = new StringBuilder();
+            for (int i = 0; i < article.getCategories().size() && i <= 0; i++) {
+                categories.append(article.getCategories().get(i));
+            }
+            binding.tvCategories.setText(categories);
         });
     }
 
     boolean isKeyboardShowing = false;
 
     void onKeyboardVisibilityChanged(boolean opened) {
-        if (opened)
-            binding.bottomModalSheet.setVisibility(View.GONE);
-        else
-            binding.bottomModalSheet.setVisibility(View.VISIBLE);
+        if (opened) binding.bottomModalSheet.setVisibility(View.GONE);
+        else binding.bottomModalSheet.setVisibility(View.VISIBLE);
     }
 
     private void setEvents() {

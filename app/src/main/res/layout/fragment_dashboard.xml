@@ -102,7 +102,7 @@
             android:layout_weight="1"
             android:background="@drawable/spinner_bg"
             android:gravity="center"
-            android:hint="PUBLIC"
+            android:hint="Danh mục"
             android:textColor="@color/white" />
 
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.R;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemViewHolder> {
 
     public List<String> getSelectedCategory() {
-        List<String> result = Collections.emptyList();
+        List<String> result = new ArrayList<>();
         for (Item item : itemList) {
             if (item.isTicked()) {
                 result.add(item.getName());
