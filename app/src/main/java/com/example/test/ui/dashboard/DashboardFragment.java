@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +39,11 @@ public class DashboardFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void observerData() {
+
+        dashboardViewModel.getSelectedImages().observe(getViewLifecycleOwner(), uris -> {
+            binding.tvImageSelected.setText("Ảnh / Video: " + uris.size() + " đã chọn");
+        });
+
         dashboardViewModel.getArticle().observe(getViewLifecycleOwner(), article -> {
             binding.tvAccessibility.setText(article.getAccessibility());
             binding.tvWeight.setText("Khối lương: " + article.getWeightKgs());
@@ -101,7 +107,8 @@ public class DashboardFragment extends Fragment {
 
         binding.btnUpload.setOnClickListener(view -> {
             dashboardViewModel.setTitle(Objects.requireNonNull(binding.noteEditText.getText()).toString());
-            dashboardViewModel.upload();
+            String message = dashboardViewModel.upload();
+            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
         });
     }
 }

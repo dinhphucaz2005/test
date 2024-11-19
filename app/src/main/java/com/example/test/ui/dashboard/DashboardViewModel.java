@@ -55,10 +55,10 @@ public class DashboardViewModel extends ViewModel {
         Objects.requireNonNull(_article.getValue()).setAccessibility(accessibility);
     }
 
-    public void upload() {
+    public String upload() {
         if (imageUrls.isEmpty()) {
             Log.d("Upload", "upload: No images selected");
-            return;
+            return "No images selected";
         }
         Article article = Objects.requireNonNull(_article.getValue());
         article.setId(UUID.randomUUID().toString());
@@ -68,7 +68,10 @@ public class DashboardViewModel extends ViewModel {
         databaseReference.child("articles").child(article.getId()).setValue(article)
                 .addOnSuccessListener(var1 -> {
                     _article.setValue(new Article());
+                    _selectedImages.setValue(Collections.emptyList());
+                    imageUrls.clear();
                 });
+        return "Up load successful";
     }
 
     private final List<String> categories = List.of("Sống xanh", "Hành động xanh", "Lối sống xanh", "Phân loại rác", "Tặng đồ cũ", "Tặng đồ ăn");
