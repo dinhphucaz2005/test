@@ -31,14 +31,21 @@ public class ImageFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentImageBinding.inflate(inflater, container, false);
         dashboardViewModel = new ViewModelProvider(requireActivity()).get(DashboardViewModel.class);
 
         setEvents();
-
+        observerData();
         return binding.getRoot();
+    }
+
+    private void observerData() {
+        dashboardViewModel.getSelectedImages().observe(requireActivity(), uris -> {
+            if (!uris.isEmpty()) {
+                binding.btnSelectImage.setImageURI(uris.get(0));
+            }
+        });
     }
 
     private void setEvents() {
@@ -49,8 +56,6 @@ public class ImageFragment extends Fragment {
         binding.btnSelectImage.setOnClickListener(view -> {
             openImageSelector();
         });
-
-
     }
 
     private void openImageSelector() {
@@ -67,10 +72,6 @@ public class ImageFragment extends Fragment {
         if (requestCode == PICK_IMAGES_REQUEST && resultCode == RESULT_OK && data != null) {
             List<Uri> selectedImages = getUris(data);
             dashboardViewModel.addSelectedImages(selectedImages);
-
-            for (Uri uri : selectedImages) {
-                Toast.makeText(getContext(), "Selected Image URI: " + uri, Toast.LENGTH_SHORT).show();
-            }
         }
     }
 

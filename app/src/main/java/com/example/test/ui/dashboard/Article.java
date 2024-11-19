@@ -2,9 +2,12 @@ package com.example.test.ui.dashboard;
 
 import androidx.media3.common.C;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Article {
     private String id;
@@ -19,6 +22,7 @@ public class Article {
     private String dateDescription;
     private String location;
     private String phoneNumber;
+    private Long dateCreated;
 
     public static final String PUBLIC_ACCESSIBILITY = "Tất cả kết nối";
     public static final String RESTRICTED_ACCESSIBILITY = "Chỉ bạn bè";
@@ -37,6 +41,21 @@ public class Article {
         this.dateDescription = "";
         this.location = "";
         this.phoneNumber = "";
+        this.dateCreated = System.currentTimeMillis();
+    }
+
+    public Long getDateCreated() {
+        return dateCreated;
+    }
+
+    public String getFormattedDateCreated() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date(dateCreated);
+        return sdf.format(date);
+    }
+
+    public void setDateCreated(Long dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public Article(Article other) {

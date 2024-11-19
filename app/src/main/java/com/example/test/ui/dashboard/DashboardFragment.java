@@ -17,6 +17,8 @@ import androidx.navigation.Navigation;
 import com.example.test.R;
 import com.example.test.databinding.FragmentDashboardBinding;
 
+import java.util.Objects;
+
 public class DashboardFragment extends Fragment {
 
 
@@ -97,6 +99,9 @@ public class DashboardFragment extends Fragment {
 
         binding.btnContact.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_contact));
 
-        binding.btnUpload.setOnClickListener(view -> dashboardViewModel.upload());
+        binding.btnUpload.setOnClickListener(view -> {
+            dashboardViewModel.setTitle(Objects.requireNonNull(binding.noteEditText.getText()).toString());
+            dashboardViewModel.upload();
+        });
     }
 }

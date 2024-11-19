@@ -62,8 +62,7 @@
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_image"
-            app:tint="@color/green" />
+            android:src="@drawable/ic_image" />
 
         <TextView
             android:layout_width="match_parent"

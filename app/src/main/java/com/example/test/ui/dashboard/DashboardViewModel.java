@@ -64,7 +64,11 @@ public class DashboardViewModel extends ViewModel {
         article.setId(UUID.randomUUID().toString());
         article.setUserId("Current User");
         article.setImageUrls(imageUrls);
-        databaseReference.child("articles").push().setValue(article);
+        article.setDateCreated(System.currentTimeMillis());
+        databaseReference.child("articles").child(article.getId()).setValue(article)
+                .addOnSuccessListener(var1 -> {
+                    _article.setValue(new Article());
+                });
     }
 
     private final List<String> categories = List.of("Sống xanh", "Hành động xanh", "Lối sống xanh", "Phân loại rác", "Tặng đồ cũ", "Tặng đồ ăn");
@@ -79,7 +83,14 @@ public class DashboardViewModel extends ViewModel {
 
     private final List<String> imageUrls = new ArrayList<>();
 
+    private final MutableLiveData<List<Uri>> _selectedImages = new MutableLiveData<>(new ArrayList<>());
+
+    public LiveData<List<Uri>> getSelectedImages() {
+        return _selectedImages;
+    }
+
     public void addSelectedImages(List<Uri> selectedImages) {
+        _selectedImages.setValue(selectedImages);
         Thread thread = new Thread(() -> {
             List<String> tempImageUrls = new ArrayList<>();
             for (Uri uri : selectedImages) {
