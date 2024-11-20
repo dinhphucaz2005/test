@@ -16,11 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCk77HauDSIYav-qNhqygpsi9tPr5VUlSw" />
         <activity
-            android:name=".MainActivity"
+            android:name=".user2.OtherActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".user1.MainActivity"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".auth.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

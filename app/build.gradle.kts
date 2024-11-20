@@ -57,12 +57,19 @@ dependencies {
     implementation("androidx.media3:media3-session:1.3.1")
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.activity:activity:1.9.0")
+    implementation("androidx.annotation:annotation:1.6.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("com.google.firebase:firebase-database:21.0.0")
     implementation("com.google.firebase:firebase-storage:21.0.1")
+
+    implementation("com.firebaseui:firebase-ui-auth:8.0.0")
 
     implementation("com.google.android.gms:play-services-location:21.0.1")
 

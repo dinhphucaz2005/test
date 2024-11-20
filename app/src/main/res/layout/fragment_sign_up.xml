@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/purple"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    tools:context=".auth.signup.SignUpFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp"
+        android:background="@drawable/custom_edittext"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableLeft="@drawable/ic_user"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/purple"
+                    android:hint="Email đăng nhâp"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background"
+                    android:textColorHint="@color/black" />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/purple"
+                    android:hint="Mật khẩu"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:paddingStart="12dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background"
+                    android:textColorHint="@color/black" />
+
+
+                <EditText
+                    android:id="@+id/confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom_edittext"
+                    android:textColorHint="@color/black"
+                    android:drawableLeft="@drawable/ic_lock"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/purple"
+                    android:hint="Nhập lại mật khẩu"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:paddingStart="12dp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background" />
+
+                <Button
+                    android:id="@+id/sign_up_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/purple"
+                    android:text="Đăng ký"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp" />
+
+                <TextView
+                    android:id="@+id/sign_in_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="Đã có tài khoản?\n Đăng nhập"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

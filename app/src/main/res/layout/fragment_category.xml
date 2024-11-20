@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ece9ec"
     android:orientation="vertical"
-    tools:context=".ui.dashboard.ImageFragment">
+    tools:context=".user1.ui.dashboard.CategoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

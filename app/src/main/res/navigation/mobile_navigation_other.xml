@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_other"
+    app:startDestination="@id/calendarFragment">
+
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.test.user2.ui.calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/garbageFragment"
+        android:name="com.example.test.user2.ui.garbage.GarbageFragment"
+        android:label="fragment_garbage"
+        tools:layout="@layout/fragment_garbage" />
+
+    <fragment
+        android:id="@+id/giftFragment"
+        android:name="com.example.test.user2.ui.gift.GiftFragment"
+        android:label="fragment_gift"
+        tools:layout="@layout/fragment_garbage" />
+
+    <fragment
+        android:id="@+id/notifyFragment"
+        android:name="com.example.test.user2.ui.notify.NotifyFragment"
+        android:label="fragment_notify"
+        tools:layout="@layout/fragment_notify" />
+
+</navigation>
