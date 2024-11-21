@@ -1,4 +1,4 @@
-package com.example.test.user1.ui.dashboard;
+package com.example.test.model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Article {
     private String userId;
     private String title;
     private String accessibility;
-    private List<String> categories;
+    private final List<String> categories;
     private List<String> otherCategories;
     private List<String> imageUrls;
     private int weightKgs;
@@ -20,6 +20,15 @@ public class Article {
     private String location;
     private String phoneNumber;
     private Long dateCreated;
+    private Long dateCollected;
+
+    public Long getDateCollected() {
+        return dateCollected;
+    }
+
+    public void setDateCollected(Long dateCollected) {
+        this.dateCollected = dateCollected;
+    }
 
     public static final String PUBLIC_ACCESSIBILITY = "Tất cả kết nối";
     public static final String RESTRICTED_ACCESSIBILITY = "Chỉ bạn bè";

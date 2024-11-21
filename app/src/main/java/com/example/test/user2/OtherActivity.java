@@ -13,6 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.test.databinding.ActivityOtherBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class OtherActivity extends AppCompatActivity {
 
@@ -28,6 +30,15 @@ public class OtherActivity extends AppCompatActivity {
         otherViewModel = new ViewModelProvider(this).get(OtherViewModel.class);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_other);
         NavigationUI.setupWithNavController(binding.otherNavView, navController);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            System.out.println(firebaseUser);
+        }
     }
 
     @Override

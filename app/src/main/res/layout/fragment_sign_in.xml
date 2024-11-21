@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple"
+    android:background="@color/green"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".auth.signin.SignInFragment">
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sign In"
                 android:textAlignment="center"
-                android:textColor="@color/purple"
+                android:textColor="@color/green"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                 android:textColorHint="@color/black"
                 android:drawableLeft="@drawable/ic_user"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/purple"
+                android:drawableTint="@color/green"
                 android:hint="Email đăng nhập"
                 android:padding="12dp"
                 android:textColor="@color/black"
@@ -60,7 +60,7 @@
                 android:drawableLeft="@drawable/ic_lock"
                 android:textColorHint="@color/black"
                 android:drawablePadding="8dp"
-                android:drawableTint="@color/purple"
+                android:drawableTint="@color/green"
                 android:hint="Mật khẩu"
                 android:inputType="textPassword"
                 android:padding="8dp"
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="@color/purple"
+                android:backgroundTint="@color/green"
                 android:text="Đăng nhập"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />

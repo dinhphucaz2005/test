@@ -20,4 +20,9 @@
         android:id="@+id/notifyFragment"
         android:icon="@drawable/ic_email"
         android:title="Email" />
+
+    <item
+        android:id="@+id/mapFragment"
+        android:icon="@drawable/ic_map"
+        android:title="Map" />
 </menu>

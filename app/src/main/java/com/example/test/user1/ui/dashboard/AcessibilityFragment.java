@@ -1,8 +1,8 @@
 package com.example.test.user1.ui.dashboard;
 
-import static com.example.test.user1.ui.dashboard.Article.PRIVATE_ACCESSIBILITY;
-import static com.example.test.user1.ui.dashboard.Article.PUBLIC_ACCESSIBILITY;
-import static com.example.test.user1.ui.dashboard.Article.RESTRICTED_ACCESSIBILITY;
+import static com.example.test.model.Article.PRIVATE_ACCESSIBILITY;
+import static com.example.test.model.Article.PUBLIC_ACCESSIBILITY;
+import static com.example.test.model.Article.RESTRICTED_ACCESSIBILITY;
 
 import android.os.Bundle;
 

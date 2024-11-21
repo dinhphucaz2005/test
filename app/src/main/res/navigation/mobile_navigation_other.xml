@@ -28,6 +28,22 @@
         android:id="@+id/notifyFragment"
         android:name="com.example.test.user2.ui.notify.NotifyFragment"
         android:label="fragment_notify"
-        tools:layout="@layout/fragment_notify" />
+        tools:layout="@layout/fragment_notify" >
+        <action
+            android:id="@+id/action_notifyFragment_to_messageFragment"
+            app:destination="@id/messageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.test.user2.ui.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.example.test.user2.ui.notify.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
 
 </navigation>

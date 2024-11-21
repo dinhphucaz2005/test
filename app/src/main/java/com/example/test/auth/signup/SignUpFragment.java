@@ -40,13 +40,13 @@ public class SignUpFragment extends Fragment {
             } else if (!password.equals(confirmPassword)) {
                 Toast.makeText(requireActivity(), "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
             } else {
-                authViewModel.signUp(email, password).addOnSuccessListener(authResult -> {
-                    Toast.makeText(requireActivity(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                    NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_auth);
-                    navController.popBackStack();
-                }).addOnFailureListener(e -> {
-                    Toast.makeText(requireActivity(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                });
+                authViewModel.signUp(email, password, binding.displayName.getText().toString(),
+                        e -> Toast.makeText(requireActivity(), e.getMessage(), Toast.LENGTH_SHORT).show(),
+                        authResult -> {
+                            Toast.makeText(requireActivity(), "Tạo tài khoản thành công", Toast.LENGTH_SHORT).show();
+                            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_auth);
+                            navController.popBackStack();
+                        });
             }
         });
         binding.signInText.setOnClickListener(v -> {
