@@ -1,8 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
     tools:context=".user2.ui.calendar.CalendarFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:columnCount="7"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <include
+            android:id="@+id/mon"
+            layout="@layout/item_day"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1" />
+
+        <include
+            android:id="@+id/tue"
+            layout="@layout/item_day"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1" />
+
+        <include
+            android:id="@+id/wed"
+            layout="@layout/item_day"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1" />
+
+        <include
+            android:id="@+id/thu"
+            layout="@layout/item_day"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1" />
+
+        <include
+            android:id="@+id/fir"
+            layout="@layout/item_day"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1" />
+
+        <include
+            android:id="@+id/sat"
+            layout="@layout/item_day"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1" />
+
+        <include
+            android:id="@+id/sun"
+            layout="@layout/item_day"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_columnWeight="1" />
+    </GridLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/layout_task_item" />
+
+</LinearLayout>

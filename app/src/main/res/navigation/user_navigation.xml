@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
-
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.test.user1.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+    app:startDestination="@id/notifyFragment2">
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -87,5 +81,19 @@
         android:name="com.example.test.user1.ui.dashboard.CategoryFragment"
         android:label="Categories"
         tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/notifyFragment2"
+        android:name="com.example.test.user2.ui.notify.NotifyFragment"
+        android:label="fragment_notify"
+        tools:layout="@layout/fragment_notify" >
+        <action
+            android:id="@+id/action_notifyFragment2_to_messageFragment3"
+            app:destination="@id/messageFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment3"
+        android:name="com.example.test.user2.ui.notify.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
 
 </navigation>

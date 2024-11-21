@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.test.R;
+import com.example.test.admin.AdminActivity;
 import com.example.test.auth.AuthViewModel;
 import com.example.test.databinding.FragmentSignInBinding;
+import com.example.test.model.User;
 import com.example.test.user1.MainActivity;
 import com.example.test.user2.OtherActivity;
 
@@ -44,15 +46,19 @@ public class SignInFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
-            authViewModel.signIn(email, password)
-                    .addOnSuccessListener(authResult -> {
-                        Toast.makeText(requireActivity(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(requireActivity(), OtherActivity.class);
-                        startActivity(intent);
-                        requireActivity().finish();
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(requireActivity(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show());
+            authViewModel.signIn(email, password, role -> {
+
+                Intent intent = switch (role) {
+                    case User.ADMIN -> new Intent(requireActivity(), AdminActivity.class);
+                    case User.STAFF -> new Intent(requireActivity(), OtherActivity.class);
+                    default -> new Intent(requireActivity(), MainActivity.class);
+                };
+
+                startActivity(intent);
+                requireActivity().finish();
+            }, e -> Toast.makeText(requireActivity(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show());
         });
+
         binding.signUpText.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_auth);
             navController.navigate(R.id.action_signInFragment_to_signUpFragment);

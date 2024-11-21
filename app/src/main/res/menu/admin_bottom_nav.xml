@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/userFragment"
+        android:icon="@drawable/ic_user"
+        android:title="User"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/articleFragment"
+        android:icon="@drawable/ic_newspaper"
+        android:title="Article"
+        tools:ignore="HardcodedText" />
+</menu>

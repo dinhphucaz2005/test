@@ -10,21 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.test.R;
 import com.example.test.databinding.FragmentGiftBinding;
-import com.example.test.user2.OtherViewModel;
+import com.example.test.user2.AppViewModel;
 
 public class GiftFragment extends Fragment {
 
     private FragmentGiftBinding binding;
-    private OtherViewModel otherViewModel;
+    private AppViewModel appViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentGiftBinding.inflate(inflater, container, false);
-        otherViewModel = new ViewModelProvider(requireActivity()).get(OtherViewModel.class);
+        appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
         return binding.getRoot();
     }
 
@@ -32,6 +31,6 @@ public class GiftFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         binding = null;
-        otherViewModel = null;
+        appViewModel = null;
     }
 }

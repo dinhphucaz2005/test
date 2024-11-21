@@ -5,8 +5,21 @@ public class User {
     private String displayName;
     private String email;
     private Boolean emailVerified;
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     private String phoneNumber;
     private String uid;
+    private int role;
+    public static final int ADMIN = 1;
+    public static final int USER = 2;
+    public static final int STAFF = 3;
 
     public User() {
         this.anonymous = false;
@@ -15,6 +28,7 @@ public class User {
         this.emailVerified = false;
         this.phoneNumber = "";
         this.uid = "";
+        this.role = USER;
     }
 
     public Boolean getAnonymous() {
@@ -63,5 +77,14 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getRoleString() {
+        return "Vai trò: " + switch (role) {
+            case ADMIN -> "Admin";
+            case USER -> "User";
+            case STAFF -> "Staff";
+            default -> "Unknown";
+        };
     }
 }

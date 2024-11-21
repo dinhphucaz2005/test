@@ -2,6 +2,7 @@ package com.example.test.auth;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.test.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -12,15 +13,39 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Optional;
+
 public class AuthViewModel extends ViewModel {
 
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-    public Task<AuthResult> signIn(String email, String password) {
-        return firebaseAuth.signInWithEmailAndPassword(email, password);
+    public void signIn(String email, String password, OnSuccessListener<Integer> onSuccessListener, OnFailureListener onFailureListener) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnSuccessListener(authResult -> {
+                    String userId = Optional.ofNullable(authResult.getUser()).map(FirebaseUser::getUid).orElse("");
 
+                    if (userId.isEmpty()) {
+                        onFailureListener.onFailure(new Exception("Người dùng không tồn tại"));
+                        return;
+                    }
+
+
+                    databaseReference.child("users").child(userId).get().addOnSuccessListener(dataSnapshot -> {
+                        if (dataSnapshot.exists()) {
+                            User user = dataSnapshot.getValue(User.class);
+                            if (user != null) {
+                                onSuccessListener.onSuccess(user.getRole());
+                            } else {
+                                onFailureListener.onFailure(new Exception("Người dùng không tồn tại"));
+                            }
+                        } else {
+                            onFailureListener.onFailure(new Exception("Người dùng không tồn tại"));
+                        }
+                    }).addOnFailureListener(onFailureListener);
+                })
+                .addOnFailureListener(onFailureListener);
     }
 
     public void signUp(String email, String password, String displayName,

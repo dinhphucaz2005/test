@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_navigation"
+    app:startDestination="@id/userFragment">
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.test.admin.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user">
+        <action
+            android:id="@+id/admin_action_userFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.test.admin.user.UserDetailFragment"
+        android:label="fragment_user_detail"
+        tools:layout="@layout/fragment_user_detail">
+        <action
+            android:id="@+id/admin_action_userDetailFragment_to_messageFragment2"
+            app:destination="@id/messageFragment2" />
+        <action
+            android:id="@+id/admin_action_userDetailFragment_to_roleFragment2"
+            app:destination="@id/roleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment2"
+        android:name="com.example.test.user2.ui.notify.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.example.test.admin.article.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article">
+        <action
+            android:id="@+id/admin_action_articleFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.example.test.admin.article.CreateTaskFragment"
+        android:label="fragment_create_task"
+        tools:layout="@layout/fragment_create_task" />
+    <fragment
+        android:id="@+id/roleFragment"
+        android:name="com.example.test.admin.user.RoleFragment"
+        android:label="fragment_role"
+        tools:layout="@layout/fragment_role" />
+</navigation>

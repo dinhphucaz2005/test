@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,34 +13,39 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.test.R;
-import com.example.test.databinding.FragmentDashboardBinding;
 import com.example.test.databinding.FragmentNotifyBinding;
-import com.example.test.user2.OtherViewModel;
+import com.example.test.model.User;
+import com.example.test.user2.AppViewModel;
 
 import java.util.ArrayList;
 
 public class NotifyFragment extends Fragment {
 
     private FragmentNotifyBinding binding;
-    private NotifyViewModel notifyViewModel;
-    private OtherViewModel otherViewModel;
+    private UsersViewModel usersViewModel;
+    private AppViewModel appViewModel;
     private UserAdapter userAdapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notifyViewModel = new ViewModelProvider(requireActivity()).get(NotifyViewModel.class);
-        otherViewModel = new ViewModelProvider(requireActivity()).get(OtherViewModel.class);
+        usersViewModel = new ViewModelProvider(requireActivity()).get(UsersViewModel.class);
+        appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
 
         binding = FragmentNotifyBinding.inflate(inflater, container, false);
 
-        notifyViewModel.loadUsers(otherViewModel.getUid());
+        usersViewModel.loadUsers(appViewModel.getUid());
 
         userAdapter = new UserAdapter(new ArrayList<>(), user -> {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_other);
+            NavController navController = Navigation.findNavController(binding.getRoot());
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", user.getUid());
-            navController.navigate(R.id.action_notifyFragment_to_messageFragment, bundle);
+            appViewModel.getRole(role -> {
+                if (role == User.STAFF)
+                    navController.navigate(R.id.action_notifyFragment_to_messageFragment, bundle);
+                else
+                    navController.navigate(R.id.action_notifyFragment2_to_messageFragment3, bundle);
+            });
         });
 
         setEvents();
@@ -50,7 +54,7 @@ public class NotifyFragment extends Fragment {
 
     private void setEvents() {
         binding.rvUsers.setAdapter(userAdapter);
-        notifyViewModel.getUsers().observe(getViewLifecycleOwner(), userAdapter::updateData);
+        usersViewModel.getUsers().observe(getViewLifecycleOwner(), userAdapter::updateData);
     }
 
     @Override
@@ -62,6 +66,6 @@ public class NotifyFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        notifyViewModel = null;
+        usersViewModel = null;
     }
 }

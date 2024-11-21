@@ -29,7 +29,7 @@ public class NotificationsFragment extends Fragment {
         notificationViewModel.loadData();
         observeData();
         adapter = new ArticleAdapter(requireActivity(), new ArrayList<>());
-        binding.rv.setAdapter(adapter);
+        binding.rvArticles.setAdapter(adapter);
         return binding.getRoot();
     }
 

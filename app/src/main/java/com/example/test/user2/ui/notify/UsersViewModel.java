@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotifyViewModel extends ViewModel {
+public class UsersViewModel extends ViewModel {
 
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private final MutableLiveData<List<User>> users = new MutableLiveData<>(new ArrayList<>());
@@ -103,5 +103,29 @@ public class NotifyViewModel extends ViewModel {
 
             }
         });
+    }
+
+    public void loadUser(String userId, OnSuccessListener<User> userListener) {
+        databaseReference.child("users").child(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                User user = task.getResult().getValue(User.class);
+                userListener.onSuccess(user);
+            }
+        });
+    }
+
+    public void setRole(String userId, int role, OnSuccessListener<String> successListener) {
+        if (userId == null) return;
+        if (role < 0 || role > 2) return;
+        databaseReference
+                .child("users")
+                .child(userId)
+                .child("role")
+                .setValue(role)
+                .addOnSuccessListener(aVoid -> successListener.onSuccess("Cập nhật vai trò thành công"));
+    }
+
+    public void updateRole(String string) {
+
     }
 }
