@@ -1,14 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp"
+    android:paddingTop="12dp"
     tools:context=".admin.article.CreateTaskFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_black"
+            android:text="Tên bài viết"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="26sp"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/date_created"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="Ngày tạo: 21/11/2024"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/date_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="Ngày thu gom: 21/11/2024"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/location_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="Nơi thu gom: "
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/image_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/layout_image_item" />
+
+
+        <TextView
+            android:id="@+id/id_article"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="ID bài viết: 04395"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/id_user_created"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="ID người đăng: 04395"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_black"
+            android:text="Tạo nhiệm vụ"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="26sp"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:id="@+id/task_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/background_edt"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="Tên bài viết"
+            android:paddingStart="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_create_task"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/finish_button_bg"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Tạo"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="26sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ece9ec"
-    tools:context=".user1.ui.dashboard.AcessibilityFragment">
+    tools:context=".user.ui.dashboard.AcessibilityFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

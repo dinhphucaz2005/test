@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ece9ec"
     android:orientation="vertical"
-    tools:context=".user1.ui.dashboard.LocationFragment">
+    tools:context=".user.ui.dashboard.LocationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
@@ -47,7 +47,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vui lòng cấp quyền truy cập vị trí để chúng tôi có thể lấy thông tin địa chỉ chính xác nhất."
+        android:text="Bạn cần cấp quyền truy cập vị\ntrí để có thể đăng bài"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -72,5 +72,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="HardcodedText" />
 
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:hint="Địa chỉ của bạn là:"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_access_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

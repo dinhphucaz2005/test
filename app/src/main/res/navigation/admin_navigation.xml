@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/messageFragment2"
-        android:name="com.example.test.user2.ui.notify.MessageFragment"
+        android:name="com.example.test.staff.ui.notify.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" />
     <fragment

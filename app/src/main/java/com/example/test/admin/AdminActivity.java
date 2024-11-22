@@ -13,7 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.test.R;
 import com.example.test.databinding.ActivityAdminBinding;
-import com.example.test.user2.AppViewModel;
+import com.example.test.AppViewModel;
 
 public class AdminActivity extends AppCompatActivity {
 

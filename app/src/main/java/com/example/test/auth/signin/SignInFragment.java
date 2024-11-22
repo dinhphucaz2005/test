@@ -19,8 +19,8 @@ import com.example.test.admin.AdminActivity;
 import com.example.test.auth.AuthViewModel;
 import com.example.test.databinding.FragmentSignInBinding;
 import com.example.test.model.User;
-import com.example.test.user1.MainActivity;
-import com.example.test.user2.OtherActivity;
+import com.example.test.user.MainActivity;
+import com.example.test.staff.OtherActivity;
 
 public class SignInFragment extends Fragment {
 

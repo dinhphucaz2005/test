@@ -10,12 +10,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/red"
         app:cardCornerRadius="12dp">
 
         <LinearLayout
+            android:id="@+id/container_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/blue_bg"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -23,19 +24,19 @@
                 android:id="@+id/tv_day_of_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
                 android:gravity="center"
                 android:text="Thứ 2"
-                android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_day_of_month"
-                android:fontFamily="@font/roboto_medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
                 android:gravity="center"
                 android:text="21"
                 android:textColor="@color/black"

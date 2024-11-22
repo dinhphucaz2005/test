@@ -1,5 +1,6 @@
 package com.example.test.model;
 
+import java.net.PortUnreachableException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +8,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class Article {
+    public static final String COLLECTION_NAME = "articles";
+    public static final String ARTICLE_ID = "articleId";
+
     private String id;
     private String userId;
     private String title;
@@ -15,12 +19,21 @@ public class Article {
     private List<String> otherCategories;
     private List<String> imageUrls;
     private int weightKgs;
-    private String date;
     private String dateDescription;
     private String location;
     private String phoneNumber;
     private Long dateCreated;
     private Long dateCollected;
+    private Coordinate coordinate;
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
 
     public Long getDateCollected() {
         return dateCollected;
@@ -43,11 +56,11 @@ public class Article {
         this.otherCategories = new ArrayList<>();
         this.imageUrls = new ArrayList<>();
         this.weightKgs = 0;
-        this.date = "";
         this.dateDescription = "";
         this.location = "";
         this.phoneNumber = "";
         this.dateCreated = System.currentTimeMillis();
+        this.coordinate = null;
     }
 
     public Long getDateCreated() {
@@ -60,23 +73,15 @@ public class Article {
         return sdf.format(date);
     }
 
-    public void setDateCreated(Long dateCreated) {
-        this.dateCreated = dateCreated;
+    public String getFormattedDateCollect() {
+        if (dateCollected == null) return "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date(dateCollected);
+        return sdf.format(date);
     }
 
-    public Article(Article other) {
-        this.id = other.id;
-        this.userId = other.userId;
-        this.title = other.title;
-        this.accessibility = other.accessibility;
-        this.categories = other.categories;
-        this.otherCategories = other.otherCategories;
-        this.imageUrls = other.imageUrls;
-        this.weightKgs = other.weightKgs;
-        this.date = other.date;
-        this.dateDescription = other.dateDescription;
-        this.location = other.location;
-        this.phoneNumber = other.phoneNumber;
+    public void setDateCreated(Long dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getId() {
@@ -96,6 +101,7 @@ public class Article {
     }
 
     public String getTitle() {
+        if (title == null || title.isEmpty()) return "Không có tiêu đề";
         return title;
     }
 
@@ -144,14 +150,6 @@ public class Article {
         this.weightKgs = weightKgs;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getDateDescription() {
         return dateDescription;
     }
@@ -161,7 +159,8 @@ public class Article {
     }
 
     public String getLocation() {
-        return location;
+        if (coordinate == null) return "Không có vị trí";
+        return "Kinh độ: " + coordinate.getLongitude() + " Vĩ độ: " + coordinate.getLatitude();
     }
 
     public void setLocation(String location) {

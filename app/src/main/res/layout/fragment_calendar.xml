@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg"
     android:orientation="vertical"
-    tools:context=".user2.ui.calendar.CalendarFragment">
+    tools:context=".staff.ui.calendar.CalendarFragment">
 
 
     <GridLayout
@@ -67,14 +67,33 @@
             android:layout_columnWeight="1" />
     </GridLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_tasks"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        android:paddingHorizontal="12dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/layout_task_item" />
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_no_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Không có công việc nào"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="26sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/layout_task_item" />
+    </RelativeLayout>
+
 
 </LinearLayout>

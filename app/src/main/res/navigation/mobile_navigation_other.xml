@@ -8,25 +8,25 @@
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.test.user2.ui.calendar.CalendarFragment"
+        android:name="com.example.test.staff.ui.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/garbageFragment"
-        android:name="com.example.test.user2.ui.garbage.GarbageFragment"
+        android:name="com.example.test.staff.ui.garbage.GarbageFragment"
         android:label="fragment_garbage"
         tools:layout="@layout/fragment_garbage" />
 
     <fragment
         android:id="@+id/giftFragment"
-        android:name="com.example.test.user2.ui.gift.GiftFragment"
+        android:name="com.example.test.staff.ui.gift.GiftFragment"
         android:label="fragment_gift"
         tools:layout="@layout/fragment_garbage" />
 
     <fragment
         android:id="@+id/notifyFragment"
-        android:name="com.example.test.user2.ui.notify.NotifyFragment"
+        android:name="com.example.test.staff.ui.notify.NotifyFragment"
         android:label="fragment_notify"
         tools:layout="@layout/fragment_notify" >
         <action
@@ -36,13 +36,13 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.test.user2.ui.map.MapFragment"
+        android:name="com.example.test.staff.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/messageFragment"
-        android:name="com.example.test.user2.ui.notify.MessageFragment"
+        android:name="com.example.test.staff.ui.notify.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" />
 

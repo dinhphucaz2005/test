@@ -2,65 +2,69 @@ package com.example.test.admin.article;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.test.AppViewModel;
 import com.example.test.R;
+import com.example.test.databinding.FragmentCreateTaskBinding;
+import com.example.test.model.Article;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateTaskFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CreateTaskFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FragmentCreateTaskBinding binding;
+    ArticleViewModel articleViewModel;
+    AppViewModel appViewModel;
+    String articleId;
+    ImageAdapter imageAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CreateTaskFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateTaskFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateTaskFragment newInstance(String param1, String param2) {
-        CreateTaskFragment fragment = new CreateTaskFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_task, container, false);
+
+        binding = FragmentCreateTaskBinding.inflate(inflater, container, false);
+        articleViewModel = new ViewModelProvider(requireActivity()).get(ArticleViewModel.class);
+        appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
+        imageAdapter = new ImageAdapter();
+        binding.imageRecyclerView.setAdapter(imageAdapter);
+        if (getArguments() != null) {
+            articleId = getArguments().getString(Article.ARTICLE_ID);
+        }
+        articleViewModel.loadArticle(articleId, article -> {
+            if (article != null) {
+                binding.articleTitle.setText(article.getTitle());
+                binding.dateCreated.setText(article.getFormattedDateCreated());
+                binding.dateCollect.setText(article.getFormattedDateCollect());
+                binding.locationCollect.setText(article.getLocation());
+                binding.idArticle.setText(article.getId());
+                binding.idUserCreated.setText(article.getUserId());
+                imageAdapter.setImages(article.getImageUrls());
+            }
+        });
+
+        setEvents();
+        return binding.getRoot();
+    }
+
+    private void setEvents() {
+        binding.btnCreateTask.setOnClickListener(v -> {
+            String title = binding.taskTitle.getText().toString();
+            if (!title.isEmpty())
+                articleViewModel.createArticle(
+                        title, articleId, binding.checkbox.isChecked(),
+                        message -> {
+                            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
+                            requireActivity().onBackPressed();
+                        }
+                );
+        });
     }
 }

@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user2.ui.garbage.GarbageFragment">
+    tools:context=".staff.ui.garbage.GarbageFragment">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

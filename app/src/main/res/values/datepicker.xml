@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Style cho DatePicker -->
+    <style name="CustomDatePickerTheme" parent="Widget.Material3.MaterialCalendar">
+        <item name="backgroundTint">@color/teal_200</item>
+        <item name="dayStyle">@color/teal_200</item>
+        <item name="dayInvalidStyle">@color/teal_200</item>
+        <item name="daySelectedStyle">@color/teal_200</item>
+        <item name="dayTodayStyle">@color/teal_200</item>
+        <item name="yearStyle">@color/teal_200</item>
+        <item name="yearSelectedStyle">@color/teal_200</item>
+        <item name="yearTodayStyle">@color/teal_200</item>
+        <item name="rangeFillColor">@color/teal_200</item>
+        <item name="shapeAppearance">@color/teal_200</item>
+    </style>
+
+    <style name="CustomDatePickerDialogTheme" parent="Widget.Material3.MaterialCalendar">
+        <item name="android:datePickerStyle">@style/CustomDatePickerTheme</item>
+    </style>
+</resources>

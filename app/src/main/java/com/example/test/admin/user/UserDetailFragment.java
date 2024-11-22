@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.test.R;
 import com.example.test.databinding.FragmentUserDetailBinding;
-import com.example.test.user2.ui.notify.UsersViewModel;
+import com.example.test.staff.ui.notify.UsersViewModel;
 
 
 public class UserDetailFragment extends Fragment {
@@ -44,12 +44,16 @@ public class UserDetailFragment extends Fragment {
 
     private void loadCurUser() {
         if (userId != null) {
+            binding.detail.setVisibility(View.GONE);
+            binding.progressBar.setVisibility(View.VISIBLE);
             usersViewModel.loadUser(userId, user -> {
                 if (user != null) {
                     binding.tvUserName.setText(user.getDisplayName());
                     binding.tvEmail.setText(user.getEmail());
                     binding.tvRole.setText(user.getRoleString());
                 }
+                binding.progressBar.setVisibility(View.GONE);
+                binding.detail.setVisibility(View.VISIBLE);
             });
         }
     }
@@ -61,7 +65,7 @@ public class UserDetailFragment extends Fragment {
     }
 
     private void setEvents() {
-        binding.tvRole.setOnClickListener(v -> {
+        binding.btnEditRole.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(binding.getRoot());
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", userId);
