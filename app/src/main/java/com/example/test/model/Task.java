@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class Task {
 
+    public static final String TASK_ID = "TASK_ID";
     private String id;
     private String articleId;
     private String userId;

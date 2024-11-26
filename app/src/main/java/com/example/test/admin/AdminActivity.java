@@ -34,6 +34,7 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
+        appViewModel.loadUser();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_admin);
         NavigationUI.setupWithNavController(binding.adminNav, navController);

@@ -11,22 +11,23 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.test.databinding.ActivityOtherBinding;
+import com.example.test.databinding.ActivityStaffBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class OtherActivity extends AppCompatActivity {
+public class StaffActivity extends AppCompatActivity {
 
-    private ActivityOtherBinding binding;
+    private ActivityStaffBinding binding;
     private AppViewModel appViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityOtherBinding.inflate(getLayoutInflater());
+        binding = ActivityStaffBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
+        appViewModel.loadUser();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_other);
         NavigationUI.setupWithNavController(binding.otherNavView, navController);
     }

@@ -19,8 +19,6 @@ import com.example.test.AppViewModel;
 import com.example.test.R;
 import com.example.test.databinding.FragmentDashboardBinding;
 
-import java.util.Objects;
-
 public class DashboardFragment extends Fragment {
 
 
@@ -92,7 +90,7 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_user);
 
         binding.tvAccessibility.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_accessibility));
 

@@ -42,7 +42,7 @@ public class NotifyFragment extends Fragment {
             bundle.putSerializable("user", user.getUid());
             appViewModel.getRole(role -> {
                 if (role == User.STAFF)
-                    navController.navigate(R.id.action_notifyFragment_to_messageFragment, bundle);
+                    navController.navigate(R.id.staff_action_notifyFragment_to_messageFragment, bundle);
                 else
                     navController.navigate(R.id.action_notifyFragment2_to_messageFragment3, bundle);
             });

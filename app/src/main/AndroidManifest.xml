@@ -25,10 +25,10 @@
             android:name=".admin.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".staff.OtherActivity"
+            android:name=".staff.StaffActivity"
             android:exported="false" />
         <activity
-            android:name=".user.MainActivity"
+            android:name=".user.UserActivity"
             android:exported="false" />
         <activity
             android:name=".auth.AuthActivity"

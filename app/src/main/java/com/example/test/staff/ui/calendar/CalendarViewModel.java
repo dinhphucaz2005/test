@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.test.FirebaseKey;
+import com.example.test.model.Article;
 import com.example.test.model.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +32,7 @@ public class CalendarViewModel extends ViewModel {
 
         String tasksOfDay = year + "-" + month + "-" + dayOfMonth; // tasksOfDay is a string in the format "yyyy-MM-dd"
 
-        databaseReference.child("tasks").child(tasksOfDay).get().addOnCompleteListener(task -> {
+        databaseReference.child(FirebaseKey.TASKS).child(tasksOfDay).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Task> tasks = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : task.getResult().getChildren()) {
@@ -49,5 +51,20 @@ public class CalendarViewModel extends ViewModel {
 
     public LiveData<List<Task>> getTasks() {
         return tasks;
+    }
+
+    private final MutableLiveData<Article> article = new MutableLiveData<>();
+
+    public LiveData<Article> getArticle() {
+        return article;
+    }
+
+    public void loadArticle(String articleId) {
+        databaseReference.child(FirebaseKey.ARTICLES).child(articleId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Article article = task.getResult().getValue(Article.class);
+                if (article != null) this.article.postValue(article);
+            }
+        });
     }
 }

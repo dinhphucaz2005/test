@@ -3,12 +3,20 @@ package com.example.test.staff.ui.map;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,7 +24,9 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.test.R;
 import com.example.test.databinding.FragmentMapBinding;
 import com.example.test.model.Coordinate;
 import com.example.test.model.Task;
@@ -44,11 +54,17 @@ public class MapFragment extends Fragment {
     private Marker currentMarker;
     private LocationCallback locationCallback;
     private CalendarViewModel calendarViewModel;
+    private Drawable drawableLocation;
+    private Drawable drawableTaskLocation;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentMapBinding.inflate(inflater, container, false);
+
+        drawableLocation = ContextCompat.getDrawable(requireContext(), R.drawable.ic_location_2);
+        drawableTaskLocation = ContextCompat.getDrawable(requireContext(), R.drawable.ic_location_3);
+
+
         initMapView();
         observeData();
         return binding.getRoot();
@@ -70,6 +86,8 @@ public class MapFragment extends Fragment {
                 Marker marker = new Marker(mapView);
                 marker.setPosition(geoPoint);
                 marker.setTitle(task.getTitle());
+                if (drawableTaskLocation != null)
+                    marker.setIcon(drawableTaskLocation);
                 markers.add(marker);
                 mapView.getOverlays().add(marker);
             }
@@ -83,8 +101,7 @@ public class MapFragment extends Fragment {
         IMapController mapController = mapView.getController();
         mapController.setZoom(15f);
 
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
                 if (location != null) {
                     double lat = location.getLatitude();
@@ -96,8 +113,7 @@ public class MapFragment extends Fragment {
             });
             startLocationUpdate();
         } else {
-            ActivityCompat.requestPermissions(requireActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 100);
         }
     }
 
@@ -147,7 +163,10 @@ public class MapFragment extends Fragment {
         currentMarker = new Marker(mapView);
         currentMarker.setPosition(startPoint);
         currentMarker.setTitle("Your Location");
+        if (drawableLocation != null) currentMarker.setIcon(drawableLocation);
+
         mapView.getOverlays().add(currentMarker);
+        mapView.invalidate();
     }
 
     @Override

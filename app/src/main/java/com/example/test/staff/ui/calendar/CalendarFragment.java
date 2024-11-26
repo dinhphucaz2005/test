@@ -11,11 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.test.R;
 import com.example.test.databinding.FragmentCalendarBinding;
 import com.example.test.databinding.ItemDayBinding;
 import com.example.test.AppViewModel;
+import com.example.test.model.Article;
+import com.example.test.model.Task;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -50,7 +54,10 @@ public class CalendarFragment extends Fragment {
 
     private void initRv() {
         taskAdapter = new TaskAdapter(new ArrayList<>(), task -> {
-            // TODO: handle task click
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Article.ARTICLE_ID, task.getArticleId());
+            NavController navController = Navigation.findNavController(binding.getRoot());
+            navController.navigate(R.id.staff_action_calendarFragment_to_taskDetailFragment, bundle);
         });
         binding.rvTasks.setAdapter(taskAdapter);
         calendarViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {

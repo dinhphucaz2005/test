@@ -1,4 +1,4 @@
-package com.example.test.user.ui.notifications;
+package com.example.test.user.ui.user;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationsViewModel extends ViewModel {
+public class UserViewModel extends ViewModel {
 
     private final MutableLiveData<List<Article>> articles = new MutableLiveData<>(new ArrayList<>());
 

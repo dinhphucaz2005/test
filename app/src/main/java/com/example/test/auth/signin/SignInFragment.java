@@ -19,8 +19,8 @@ import com.example.test.admin.AdminActivity;
 import com.example.test.auth.AuthViewModel;
 import com.example.test.databinding.FragmentSignInBinding;
 import com.example.test.model.User;
-import com.example.test.user.MainActivity;
-import com.example.test.staff.OtherActivity;
+import com.example.test.staff.StaffActivity;
+import com.example.test.user.UserActivity;
 
 public class SignInFragment extends Fragment {
 
@@ -50,8 +50,8 @@ public class SignInFragment extends Fragment {
 
                 Intent intent = switch (role) {
                     case User.ADMIN -> new Intent(requireActivity(), AdminActivity.class);
-                    case User.STAFF -> new Intent(requireActivity(), OtherActivity.class);
-                    default -> new Intent(requireActivity(), MainActivity.class);
+                    case User.STAFF -> new Intent(requireActivity(), StaffActivity.class);
+                    default -> new Intent(requireActivity(), UserActivity.class);
                 };
 
                 startActivity(intent);

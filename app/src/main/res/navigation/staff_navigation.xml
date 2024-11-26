@@ -10,27 +10,31 @@
         android:id="@+id/calendarFragment"
         android:name="com.example.test.staff.ui.calendar.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar">
+        <action
+            android:id="@+id/staff_action_calendarFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/garbageFragment"
         android:name="com.example.test.staff.ui.garbage.GarbageFragment"
         android:label="fragment_garbage"
-        tools:layout="@layout/fragment_garbage" />
+        tools:layout="@layout/fragment_cur_user" />
 
     <fragment
         android:id="@+id/giftFragment"
         android:name="com.example.test.staff.ui.gift.GiftFragment"
         android:label="fragment_gift"
-        tools:layout="@layout/fragment_garbage" />
+        tools:layout="@layout/fragment_gift" />
 
     <fragment
         android:id="@+id/notifyFragment"
         android:name="com.example.test.staff.ui.notify.NotifyFragment"
         android:label="fragment_notify"
-        tools:layout="@layout/fragment_notify" >
+        tools:layout="@layout/fragment_notify">
         <action
-            android:id="@+id/action_notifyFragment_to_messageFragment"
+            android:id="@+id/staff_action_notifyFragment_to_messageFragment"
             app:destination="@id/messageFragment" />
     </fragment>
 
@@ -45,5 +49,10 @@
         android:name="com.example.test.staff.ui.notify.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.example.test.staff.ui.calendar.TaskDetailFragment"
+        android:label="fragment_task_detail"
+        tools:layout="@layout/fragment_task_detail" />
 
 </navigation>

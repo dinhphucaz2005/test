@@ -47,18 +47,6 @@
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_finish"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:background="@drawable/button_bg"
-            android:text="Hoàn tất"
-            android:textColor="@color/green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

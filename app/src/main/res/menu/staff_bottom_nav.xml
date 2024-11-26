@@ -6,10 +6,6 @@
         android:icon="@drawable/ic_calendar"
         android:title="Calendar" />
 
-    <item
-        android:id="@+id/garbageFragment"
-        android:icon="@drawable/ic_trash"
-        android:title="Trash" />
 
     <item
         android:id="@+id/giftFragment"
@@ -19,10 +15,15 @@
     <item
         android:id="@+id/notifyFragment"
         android:icon="@drawable/ic_email"
-        android:title="Email" />
+        android:title="Message" />
 
     <item
         android:id="@+id/mapFragment"
         android:icon="@drawable/ic_map"
         android:title="Map" />
+
+    <item
+        android:id="@+id/garbageFragment"
+        android:icon="@drawable/ic_setting"
+        android:title="Setting" />
 </menu>

@@ -50,4 +50,11 @@
         android:name="com.example.test.admin.user.RoleFragment"
         android:label="fragment_role"
         tools:layout="@layout/fragment_role" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.test.staff.ui.garbage.GarbageFragment"
+        android:label="fragment_cur_user"
+        tools:layout="@layout/fragment_cur_user" />
+
+
 </navigation>

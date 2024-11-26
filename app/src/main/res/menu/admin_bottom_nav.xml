@@ -11,4 +11,10 @@
         android:icon="@drawable/ic_newspaper"
         android:title="Article"
         tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/settingFragment"
+        android:icon="@drawable/ic_setting"
+        android:title="Setting"
+        tools:ignore="HardcodedText" />
 </menu>
