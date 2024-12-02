@@ -15,9 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.test.auth.AuthActivity;
 import com.example.test.databinding.FragmentNotificationsBinding;
 import com.example.test.AppViewModel;
+import com.example.test.model.User;
 import com.example.test.user.ui.dashboard.ArticleAdapter;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 
 public class UserFragment extends Fragment {
     private FragmentNotificationsBinding binding;
@@ -46,6 +49,8 @@ public class UserFragment extends Fragment {
 
     private void observeData() {
         notificationViewModel.observeArticle().observe(getViewLifecycleOwner(), adapter::setArticles);
+
+        appViewModel.observeUser().observe(getViewLifecycleOwner(), user -> binding.tvUserName.setText(Optional.ofNullable(user).map(User::getDisplayName).orElse("Chưa cập nhật")));
     }
 
     private void setEvents() {

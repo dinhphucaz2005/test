@@ -1,24 +1,32 @@
 package com.example.test.model;
 
-import android.graphics.CornerPathEffect;
-
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
 public class Task {
 
-    public static final String TASK_ID = "TASK_ID";
     private String id;
     private String articleId;
     private String userId;
     private String title;
     private Long dateCollected;
-    private Boolean inProgress;
+    private String collectingStaffId;
+    private Integer status = TaskStatus.UNASSIGNED;
+
+    public String getCollectingStaffId() {
+        return collectingStaffId;
+    }
+
+    public void setCollectingStaffId(String collectingStaffId) {
+        this.collectingStaffId = collectingStaffId;
+    }
+
     private Coordinate coordinate;
 
-    public static Task fromArticle(Article article, String title, Boolean isRandom) {
-        double lat = article.getCoordinate().getLatitude();
-        double lon = article.getCoordinate().getLongitude();
+    public static Task fromArticle(Article article, String title, Boolean isRandom, String collectingStaffId) {
+        double lat = Optional.ofNullable(article.getLocation()).map(location -> location.getCoordinate().getLatitude()).orElse(0.0);
+        double lon = Optional.ofNullable(article.getLocation()).map(location -> location.getCoordinate().getLongitude()).orElse(0.0);
 
         if (isRandom) {
             double distance = 1000.0;
@@ -43,8 +51,8 @@ public class Task {
         task.setUserId(article.getUserId());
         task.setTitle(title);
         task.setDateCollected(article.getDateCollected());
-        task.inProgress = false;
         task.coordinate = new Coordinate(lat, lon);
+        task.collectingStaffId = collectingStaffId;
         return task;
     }
 
@@ -95,11 +103,19 @@ public class Task {
         this.userId = "";
         this.title = "";
         this.dateCollected = 0L;
-        this.inProgress = true;
         this.coordinate = new Coordinate();
+        this.collectingStaffId = null;
     }
 
     public Coordinate getCoordinate() {
         return coordinate;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

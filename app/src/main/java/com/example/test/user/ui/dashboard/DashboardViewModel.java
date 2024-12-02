@@ -1,14 +1,15 @@
 package com.example.test.user.ui.dashboard;
 
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.test.FirebaseKey;
 import com.example.test.model.Article;
 import com.example.test.model.Coordinate;
+import com.example.test.model.Location;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -57,24 +58,25 @@ public class DashboardViewModel extends ViewModel {
         Objects.requireNonNull(_article.getValue()).setAccessibility(accessibility);
     }
 
-    public void upload(String userId, OnSuccessListener<String> listener) {
+    public void upload(String userId, String title, OnSuccessListener<String> listener) {
         if (imageUrls.isEmpty()) {
             listener.onSuccess("Không ảnh nào được chọn");
             return;
         }
         Article article = Objects.requireNonNull(_article.getValue());
 
-        if (article.getCoordinate() == null) {
+        if (article.getLocation() == null) {
             listener.onSuccess("Vui lòng chọn vị trí");
             return;
         }
 
+        article.setTitle(title);
         article.setId(UUID.randomUUID().toString());
         article.setUserId(userId);
         article.setImageUrls(imageUrls);
         article.setDateCreated(System.currentTimeMillis());
 
-        databaseReference.child("articles").child(article.getId()).setValue(article)
+        databaseReference.child(FirebaseKey.ARTICLES).child(article.getId()).setValue(article)
                 .addOnSuccessListener(var1 -> {
                     _article.setValue(new Article());
                     _selectedImages.setValue(Collections.emptyList());
@@ -132,7 +134,7 @@ public class DashboardViewModel extends ViewModel {
         Objects.requireNonNull(_article.getValue()).setCategories(selectedCategory);
     }
 
-    public void setCoordinate(double latitude, double longitude) {
-        Objects.requireNonNull(_article.getValue()).setCoordinate(new Coordinate(latitude, longitude));
+    public void setLocation(Location location) {
+        Objects.requireNonNull(_article.getValue()).setLocation(location);
     }
 }

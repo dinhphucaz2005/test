@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.test.AppViewModel;
 import com.example.test.admin.article.ImageAdapter;
 import com.example.test.databinding.FragmentTaskDetailBinding;
 import com.example.test.model.Article;
@@ -19,6 +20,7 @@ public class TaskDetailFragment extends Fragment {
 
     private FragmentTaskDetailBinding binding;
     private CalendarViewModel calendarViewModel;
+    private AppViewModel appViewModel;
     private ImageAdapter imageAdapter;
 
 
@@ -26,6 +28,7 @@ public class TaskDetailFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTaskDetailBinding.inflate(inflater, container, false);
         calendarViewModel = new ViewModelProvider(requireActivity()).get(CalendarViewModel.class);
+        appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
 
         if (getArguments() != null) {
             String articleId = getArguments().getString(Article.ARTICLE_ID);
@@ -40,15 +43,17 @@ public class TaskDetailFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void observeData() {
+
+
         calendarViewModel.getArticle().observe(getViewLifecycleOwner(), article -> {
             if (article != null) {
                 binding.articleTitle.setText(article.getTitle());
                 binding.dateCreated.setText(article.getFormattedDateCreated());
                 binding.dateCollect.setText(article.getFormattedDateCollect());
-                binding.locationCollect.setText("Nơi thu gom:" + article.getLocation());
-                binding.idArticle.setText("ID bài viết: " + article.getId());
-                binding.idUserCreated.setText("ID người đăng bài: " + article.getUserId());
+                binding.locationCollect.setText("Nơi thu gom: " + article.getLocation().getAddress());
+                binding.tvPhoneNumberPost.setText("Số điện thoại người đăng: " + article.getPhoneNumber());
                 imageAdapter.setImages(article.getImageUrls());
+                appViewModel.getUserById(article.getUserId(), user -> binding.tvUsernamePost.setText("Người đăng: " + user.getDisplayName()));
             }
         });
     }

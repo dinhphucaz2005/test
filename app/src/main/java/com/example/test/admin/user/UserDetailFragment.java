@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.test.R;
 import com.example.test.databinding.FragmentUserDetailBinding;
-import com.example.test.staff.ui.notify.UsersViewModel;
+import com.example.test.staff.ui.chat.UsersViewModel;
 
 
 public class UserDetailFragment extends Fragment {

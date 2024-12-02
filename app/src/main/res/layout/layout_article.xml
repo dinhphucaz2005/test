@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/roboto_black"
             android:text="18 tháng 11"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -41,11 +42,36 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_black"
         android:hint="Article title"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="26sp"
         tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Trạng thái: "
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Đã xác nhận"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/thumbnail"

@@ -1,4 +1,4 @@
-package com.example.test.staff.ui.notify;
+package com.example.test.staff.ui.chat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

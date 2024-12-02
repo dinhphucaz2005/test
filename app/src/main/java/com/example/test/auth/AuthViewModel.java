@@ -2,6 +2,7 @@ package com.example.test.auth;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.test.FirebaseKey;
 import com.example.test.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,7 +33,7 @@ public class AuthViewModel extends ViewModel {
                     }
 
 
-                    databaseReference.child("users").child(userId).get().addOnSuccessListener(dataSnapshot -> {
+                    databaseReference.child(FirebaseKey.USERS).child(userId).get().addOnSuccessListener(dataSnapshot -> {
                         if (dataSnapshot.exists()) {
                             User user = dataSnapshot.getValue(User.class);
                             if (user != null) {
@@ -66,7 +67,7 @@ public class AuthViewModel extends ViewModel {
                 onFailureListener.onFailure(new Exception("Người dùng không tồn tại"));
             }
         }).addOnFailureListener(e -> {
-            onFailureListener.onFailure(new Exception("Đăng ký thất bại"));
+            onFailureListener.onFailure(new Exception(e.getMessage()));
         });
     }
 
@@ -74,7 +75,7 @@ public class AuthViewModel extends ViewModel {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             databaseReference
-                    .child("users")
+                    .child(FirebaseKey.USERS)
                     .child(user.getUid())
                     .setValue(user);
         }
