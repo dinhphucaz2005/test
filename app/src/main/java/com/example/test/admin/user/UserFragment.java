@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import com.example.test.R;
 import com.example.test.databinding.FragmentUserBinding;
 import com.example.test.AppViewModel;
-import com.example.test.staff.ui.notify.UsersViewModel;
-import com.example.test.staff.ui.notify.UserAdapter;
+import com.example.test.staff.ui.chat.UsersViewModel;
+import com.example.test.staff.ui.chat.UserAdapter;
 
 import java.util.ArrayList;
 

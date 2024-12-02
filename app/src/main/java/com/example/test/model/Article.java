@@ -1,16 +1,14 @@
 package com.example.test.model;
 
-import java.net.PortUnreachableException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Article {
-    public static final String COLLECTION_NAME = "articles";
     public static final String ARTICLE_ID = "articleId";
-
     private String id;
     private String userId;
     private String title;
@@ -20,21 +18,35 @@ public class Article {
     private List<String> imageUrls;
     private int weightKgs;
     private String dateDescription;
-    private String location;
     private String phoneNumber;
     private Long dateCreated;
     private Long dateCollected;
-    private Coordinate coordinate;
 
-    public Coordinate getCoordinate() {
-        return coordinate;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
+    private Location location;
+    public Integer getArticleStatus() {
+        return articleStatus;
+    }
 
+    public void setArticleStatus(Integer articleStatus) {
+        this.articleStatus = articleStatus;
+    }
+
+    private Integer articleStatus = ArticleStatus.IN_PROGRESS;
+
+    public String getCreatedTaskString() {
+        if (Objects.equals(articleStatus, ArticleStatus.IN_PROGRESS)) return "Đang xử lý";
+        if (Objects.equals(articleStatus, ArticleStatus.DONE)) return "Đã xử lý";
+        if (Objects.equals(articleStatus, ArticleStatus.CANCEL)) return "Đã hủy";
+        return "Không xác định";
+    }
     public Long getDateCollected() {
         return dateCollected;
     }
@@ -57,10 +69,10 @@ public class Article {
         this.imageUrls = new ArrayList<>();
         this.weightKgs = 0;
         this.dateDescription = "";
-        this.location = "";
         this.phoneNumber = "";
         this.dateCreated = System.currentTimeMillis();
-        this.coordinate = null;
+        this.dateCollected = null;
+        this.location = null;
     }
 
     public Long getDateCreated() {
@@ -70,14 +82,14 @@ public class Article {
     public String getFormattedDateCreated() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = new Date(dateCreated);
-        return sdf.format(date);
+        return "Ngày đăng bài: " + sdf.format(date);
     }
 
     public String getFormattedDateCollect() {
         if (dateCollected == null) return "";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = new Date(dateCollected);
-        return sdf.format(date);
+        return "Ngày thu gom: " + sdf.format(date);
     }
 
     public void setDateCreated(Long dateCreated) {
@@ -157,16 +169,6 @@ public class Article {
     public void setDateDescription(String dateDescription) {
         this.dateDescription = dateDescription;
     }
-
-    public String getLocation() {
-        if (coordinate == null) return "Không có vị trí";
-        return "Kinh độ: " + coordinate.getLongitude() + " Vĩ độ: " + coordinate.getLatitude();
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }

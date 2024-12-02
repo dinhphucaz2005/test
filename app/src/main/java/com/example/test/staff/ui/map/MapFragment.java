@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.test.AppViewModel;
 import com.example.test.R;
 import com.example.test.databinding.FragmentMapBinding;
 import com.example.test.model.Coordinate;
@@ -56,10 +57,12 @@ public class MapFragment extends Fragment {
     private CalendarViewModel calendarViewModel;
     private Drawable drawableLocation;
     private Drawable drawableTaskLocation;
+    private AppViewModel appViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentMapBinding.inflate(inflater, container, false);
+        appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
 
         drawableLocation = ContextCompat.getDrawable(requireContext(), R.drawable.ic_location_2);
         drawableTaskLocation = ContextCompat.getDrawable(requireContext(), R.drawable.ic_location_3);
@@ -75,7 +78,7 @@ public class MapFragment extends Fragment {
     private void observeData() {
 
         calendarViewModel = new ViewModelProvider(requireActivity()).get(CalendarViewModel.class);
-        calendarViewModel.loadTasksOfToday();
+        calendarViewModel.loadTasksOfToday(appViewModel.getUid());
 
         calendarViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             markers.forEach(marker -> mapView.getOverlays().remove(marker));

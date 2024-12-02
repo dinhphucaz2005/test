@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_weight" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_user_setting"
         android:name="com.example.test.user.ui.user.UserFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
@@ -62,7 +62,11 @@
         android:id="@+id/navigation_location"
         android:name="com.example.test.user.ui.dashboard.LocationFragment"
         android:label="Location"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/user_action_navigation_location_to_setOnMapFragment"
+            app:destination="@id/setOnMapFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_contact"
@@ -83,7 +87,7 @@
         tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/notifyFragment2"
-        android:name="com.example.test.staff.ui.notify.NotifyFragment"
+        android:name="com.example.test.staff.ui.chat.NotifyFragment"
         android:label="fragment_notify"
         tools:layout="@layout/fragment_notify" >
         <action
@@ -92,8 +96,18 @@
     </fragment>
     <fragment
         android:id="@+id/messageFragment3"
-        android:name="com.example.test.staff.ui.notify.MessageFragment"
+        android:name="com.example.test.staff.ui.chat.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/setOnMapFragment"
+        android:name="com.example.test.user.ui.dashboard.SetOnMapFragment"
+        android:label="fragment_set_on_map"
+        tools:layout="@layout/fragment_set_on_map" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.test.staff.ui.notification.NotificationFragment"
+        android:label="fragment_staff_notification"
+        tools:layout="@layout/fragment_staff_notification" />
 
 </navigation>

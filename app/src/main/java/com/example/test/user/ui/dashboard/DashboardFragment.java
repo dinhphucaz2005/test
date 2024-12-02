@@ -18,6 +18,10 @@ import androidx.navigation.Navigation;
 import com.example.test.AppViewModel;
 import com.example.test.R;
 import com.example.test.databinding.FragmentDashboardBinding;
+import com.example.test.model.Article;
+import com.example.test.model.Location;
+
+import java.util.Optional;
 
 public class DashboardFragment extends Fragment {
 
@@ -49,7 +53,7 @@ public class DashboardFragment extends Fragment {
             binding.tvAccessibility.setText(article.getAccessibility());
             binding.tvWeight.setText("Khối lương: " + article.getWeightKgs());
             binding.tvTime.setText("Thời gian thu gom: " + article.getFormattedDateCollect());
-            binding.tvLocation.setText("Địa chỉ: " + article.getLocation());
+            binding.tvLocation.setText("Địa chỉ: " + Optional.ofNullable(article.getLocation()).map(Location::getAddress).orElse(""));
             binding.tvPhoneNumber.setText("Liên hệ: " + article.getPhoneNumber());
             StringBuilder categories = new StringBuilder();
             for (int i = 0; i < article.getCategories().size() && i <= 0; i++) {
@@ -106,6 +110,6 @@ public class DashboardFragment extends Fragment {
 
         binding.btnContact.setOnClickListener(view -> navController.navigate(R.id.action_navigation_dashboard_to_navigation_contact));
 
-        binding.btnUpload.setOnClickListener(view -> dashboardViewModel.upload(appViewModel.getUid(), message -> Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()));
+        binding.btnUpload.setOnClickListener(view -> dashboardViewModel.upload(appViewModel.getUid(), String.valueOf(binding.noteEditText.getText()), message -> Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()));
     }
 }

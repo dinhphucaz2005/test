@@ -18,6 +18,7 @@ import com.example.test.R;
 import com.example.test.databinding.FragmentCalendarBinding;
 import com.example.test.databinding.ItemDayBinding;
 import com.example.test.AppViewModel;
+import com.example.test.helper.DateFormatted;
 import com.example.test.model.Article;
 import com.example.test.model.Task;
 
@@ -34,28 +35,78 @@ public class CalendarFragment extends Fragment {
     private AppViewModel appViewModel;
     private CalendarViewModel calendarViewModel;
     private TaskAdapter taskAdapter;
+    private @DrawableRes
+    final int background = R.drawable.blue_bg;
+    private @DrawableRes
+    final int backgroundSelected = R.drawable.blue_bg_selected;
+    List<ItemDayBinding> itemDayBindings = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
         calendarViewModel = new ViewModelProvider(requireActivity()).get(CalendarViewModel.class);
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
+        initCalendar();
+        setEvents();
         return binding.getRoot();
+    }
+
+    private void setEvents() {
+        binding.btnBackWeek.setOnClickListener(v -> calendarViewModel.previousWeek());
+        binding.btnNextWeek.setOnClickListener(v -> calendarViewModel.nextWeek());
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initCalendar();
         initRv();
-
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        observeData();
+    }
+
+    private void observeData() {
+        calendarViewModel.getLocalDates().observe(getViewLifecycleOwner(), localDates -> {
+
+            LocalDate firstDay = localDates.get(0);
+            LocalDate lastDay = localDates.get(DAY_IN_WEEK - 1);
+            String dateFormatted = DateFormatted.get(firstDay, lastDay);
+            binding.tvWeek.setText(dateFormatted);
+
+            for (int i = 0; i < DAY_IN_WEEK; i++) {
+                final int finalI = i;
+                LocalDate date = localDates.get(finalI);
+                itemDayBindings.get(finalI).tvDayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+                itemDayBindings.get(finalI).tvDayOfWeek.setText(date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
+                String formatted = DateFormatted.get(localDates.get(i));
+
+                if (date.equals(LocalDate.now())) {
+                    itemDayBindings.get(finalI).containerBg.setBackgroundResource(backgroundSelected);
+                    calendarViewModel.loadTasks(formatted, appViewModel.getUid());
+                }
+
+                itemDayBindings.get(finalI).getRoot().setOnClickListener(v -> {
+                    for (ItemDayBinding itemDayBinding : itemDayBindings) {
+                        itemDayBinding.containerBg.setBackgroundResource(background);
+                    }
+                    itemDayBindings.get(finalI).containerBg.setBackgroundResource(backgroundSelected);
+                    calendarViewModel.loadTasks(formatted, appViewModel.getUid());
+                });
+            }
+        });
+    }
+
 
     private void initRv() {
         taskAdapter = new TaskAdapter(new ArrayList<>(), task -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable(Article.ARTICLE_ID, task.getArticleId());
+            bundle.putSerializable(Task.TASK_ID, task.getId());
+            bundle.putSerializable(Task.DATE_FORMATTED, DateFormatted.get(task.getDateCollected()));
             NavController navController = Navigation.findNavController(binding.getRoot());
             navController.navigate(R.id.staff_action_calendarFragment_to_taskDetailFragment, bundle);
         });
@@ -74,51 +125,21 @@ public class CalendarFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void initCalendar() {
-        List<ItemDayBinding> bindings = new ArrayList<>();
-        bindings.add(binding.sun);
-        bindings.add(binding.mon);
-        bindings.add(binding.tue);
-        bindings.add(binding.wed);
-        bindings.add(binding.thu);
-        bindings.add(binding.fir);
-        bindings.add(binding.sat);
-        @DrawableRes int background = R.drawable.blue_bg;
-        @DrawableRes int backgroundSelected = R.drawable.blue_bg_selected;
 
-        for (ItemDayBinding itemDayBinding : bindings) {
+        itemDayBindings.clear();
+
+        itemDayBindings.add(binding.mon);
+        itemDayBindings.add(binding.tue);
+        itemDayBindings.add(binding.wed);
+        itemDayBindings.add(binding.thu);
+        itemDayBindings.add(binding.fir);
+        itemDayBindings.add(binding.sat);
+        itemDayBindings.add(binding.sun);
+
+        for (ItemDayBinding itemDayBinding : itemDayBindings) {
             itemDayBinding.containerBg.setBackgroundResource(background);
         }
 
-        LocalDate today = LocalDate.now();
-        LocalDate startOfWeek = today.minusDays(today.getDayOfWeek().getValue() % 7);
-
-
-        ArrayList<Integer> dayOfMonths = new ArrayList<>(DAY_IN_WEEK);
-        ArrayList<String> dayOfWeeks = new ArrayList<>(DAY_IN_WEEK);
-
-        for (int i = 0; i < DAY_IN_WEEK; i++) {
-            LocalDate day = startOfWeek.plusDays(i);
-
-            String dayOfWeek = day.getDayOfWeek().getDisplayName(TextStyle.SHORT, new Locale("en", "US"));
-            int dayOfMonth = day.getDayOfMonth();
-            dayOfMonths.add(dayOfMonth);
-            dayOfWeeks.add(dayOfWeek);
-        }
-
-
-        for (int i = 0; i < DAY_IN_WEEK; i++) {
-            bindings.get(i).tvDayOfMonth.setText(dayOfMonths.get(i) + "");
-            bindings.get(i).tvDayOfWeek.setText(dayOfWeeks.get(i));
-            int dayOfMonth = dayOfMonths.get(i);
-            final int finalI = i;
-            bindings.get(i).getRoot().setOnClickListener(v -> {
-                for (ItemDayBinding itemDayBinding : bindings) {
-                    itemDayBinding.containerBg.setBackgroundResource(background);
-                }
-                bindings.get(finalI).containerBg.setBackgroundResource(backgroundSelected);
-                calendarViewModel.loadTasks(dayOfMonth);
-            });
-        }
 
     }
 

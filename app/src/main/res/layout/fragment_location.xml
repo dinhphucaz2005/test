@@ -43,48 +43,45 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bạn cần cấp quyền truy cập vị\ntrí để có thể đăng bài"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar"
-        tools:ignore="HardcodedText" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_access_location"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/finish_button_bg"
-        android:text="Cấp quyền truy cập vị trí"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/tv_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/roboto_medium"
+    <EditText
+        android:id="@+id/edt_location"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_bg"
         android:gravity="center"
-        android:hint="Địa chỉ của bạn là:"
+        android:hint="Nhập địa chỉ thu gom rác"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toStartOf="@+id/appCompatButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_access_location" />
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/appCompatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/finish_button_bg"
+        android:text="Chọn"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edt_location" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_location"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_location"
+        tools:layout_editor_absoluteX="16dp"
+        tools:listitem="@layout/layout_location_item" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

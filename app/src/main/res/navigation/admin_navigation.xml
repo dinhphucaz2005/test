@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/messageFragment2"
-        android:name="com.example.test.staff.ui.notify.MessageFragment"
+        android:name="com.example.test.staff.ui.chat.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" />
     <fragment
@@ -44,7 +44,11 @@
         android:id="@+id/createTaskFragment"
         android:name="com.example.test.admin.article.CreateTaskFragment"
         android:label="fragment_create_task"
-        tools:layout="@layout/fragment_create_task" />
+        tools:layout="@layout/fragment_create_task" >
+        <action
+            android:id="@+id/admin_action_createTaskFragment_to_collectStaffFragment"
+            app:destination="@id/collectStaffFragment" />
+    </fragment>
     <fragment
         android:id="@+id/roleFragment"
         android:name="com.example.test.admin.user.RoleFragment"
@@ -52,9 +56,14 @@
         tools:layout="@layout/fragment_role" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.test.staff.ui.garbage.GarbageFragment"
+        android:name="com.example.test.staff.ui.setting.SettingFragment"
         android:label="fragment_cur_user"
         tools:layout="@layout/fragment_cur_user" />
+    <fragment
+        android:id="@+id/collectStaffFragment"
+        android:name="com.example.test.admin.article.CollectStaffFragment"
+        android:label="fragment_collect_staff"
+        tools:layout="@layout/fragment_collect_staff" />
 
 
 </navigation>

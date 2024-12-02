@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.test.R;
 import com.example.test.databinding.FragmentRoleBinding;
 import com.example.test.model.User;
-import com.example.test.staff.ui.notify.UsersViewModel;
+import com.example.test.staff.ui.chat.UsersViewModel;
 
 
 public class RoleFragment extends Fragment {

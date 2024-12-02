@@ -1,4 +1,4 @@
-package com.example.test.staff.ui.garbage;
+package com.example.test.staff.ui.setting;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.example.test.model.User;
 
 import java.util.Optional;
 
-public class GarbageFragment extends Fragment {
+public class SettingFragment extends Fragment {
 
     private FragmentCurUserBinding binding;
     private AppViewModel appViewModel;

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.test.databinding.FragmentNotifyBinding;
-import com.example.test.staff.ui.notify.UsersViewModel;
+import com.example.test.staff.ui.chat.UsersViewModel;
 
 public class HomeFragment extends Fragment {
     private FragmentNotifyBinding binding;
