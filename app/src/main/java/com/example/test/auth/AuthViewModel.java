@@ -44,9 +44,9 @@ public class AuthViewModel extends ViewModel {
                         } else {
                             onFailureListener.onFailure(new Exception("Người dùng không tồn tại"));
                         }
-                    }).addOnFailureListener(onFailureListener);
+                    }).addOnFailureListener(v -> onFailureListener.onFailure(new Exception(v.getMessage())));
                 })
-                .addOnFailureListener(onFailureListener);
+                .addOnFailureListener(v -> onFailureListener.onFailure(new Exception(v.getMessage())));
     }
 
     public void signUp(String email, String password, String displayName,

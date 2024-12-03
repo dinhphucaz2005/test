@@ -4,7 +4,6 @@ import static com.example.test.helper.DateFormatted.DAY_IN_WEEK;
 
 import android.util.Log;
 
-import androidx.collection.PackingUtilsKt;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,6 +11,8 @@ import androidx.lifecycle.ViewModel;
 import com.example.test.FirebaseKey;
 import com.example.test.model.Article;
 import com.example.test.model.Task;
+import com.example.test.model.TaskNotification;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,8 +22,6 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import retrofit2.http.PUT;
 
 public class CalendarViewModel extends ViewModel {
 
@@ -125,5 +124,12 @@ public class CalendarViewModel extends ViewModel {
     }
 
 
-
+    public void loadTask(String dateFormatted, String taskId, OnSuccessListener<Task> listener) {
+        databaseReference.child(FirebaseKey.TASKS).child(dateFormatted).child(taskId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Task task1 = task.getResult().getValue(Task.class);
+                listener.onSuccess(task1);
+            }
+        });
+    }
 }

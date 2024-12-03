@@ -134,44 +134,10 @@
                 tools:ignore="HardcodedText" />
 
             <LinearLayout
-                android:id="@+id/proof_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_black"
-                    android:text="Minh chứng hoàn thành"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="26sp"
-                    tools:ignore="HardcodedText" />
-
-                <ImageView
-                    android:id="@+id/proof_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_image"
-                    tools:ignore="ContentDescription" />
-
-                <Button
-                    android:id="@+id/btn_sending"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Gửi yêu cầu hoàn thành" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/proof_layout_pending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -201,6 +167,32 @@
                     android:textColorHint="@color/black"
                     android:textSize="26sp"
                     tools:ignore="HardcodedText" />
+
+                <LinearLayout
+                    android:id="@+id/proof_btn_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_accept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đồng ý" />
+
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Không đồng ý" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

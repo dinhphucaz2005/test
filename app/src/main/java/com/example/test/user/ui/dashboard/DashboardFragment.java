@@ -50,6 +50,7 @@ public class DashboardFragment extends Fragment {
         });
 
         dashboardViewModel.getArticle().observe(getViewLifecycleOwner(), article -> {
+            if (article == null) return;
             binding.tvAccessibility.setText(article.getAccessibility());
             binding.tvWeight.setText("Khối lương: " + article.getWeightKgs());
             binding.tvTime.setText("Thời gian thu gom: " + article.getFormattedDateCollect());

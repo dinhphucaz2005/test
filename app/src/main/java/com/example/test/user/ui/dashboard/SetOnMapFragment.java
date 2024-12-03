@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -23,6 +24,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
@@ -63,6 +65,15 @@ public class SetOnMapFragment extends Fragment {
 
     private void observeData() {
         locationViewModel.observeLocation().observe(getViewLifecycleOwner(), this::onLocationChanged);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Configuration.getInstance().setTileDownloadThreads((short) 2);
+        Configuration.getInstance().setTileFileSystemCacheMaxBytes(500L * 1024 * 1024);
+        Configuration.getInstance().setUserAgentValue(requireActivity().getPackageName());
     }
 
     private void onLocationChanged(Location location) {
