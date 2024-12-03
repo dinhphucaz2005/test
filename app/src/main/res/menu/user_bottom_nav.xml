@@ -23,4 +23,10 @@
         android:title="Setting"
         tools:ignore="HardcodedText" />
 
+    <item
+        android:id="@+id/sensorFragment"
+        android:icon="@drawable/ic_sensor"
+        android:title="Sensor"
+        tools:ignore="HardcodedText" />
+
 </menu>

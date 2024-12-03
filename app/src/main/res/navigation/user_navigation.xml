@@ -118,5 +118,10 @@
         android:name="com.example.test.user.ui.notification.NotificationDetailFragment"
         android:label="fragment_notification_detail"
         tools:layout="@layout/fragment_notification_detail" />
+    <fragment
+        android:id="@+id/sensorFragment"
+        android:name="com.example.test.user.ui.sensor.SensorFragment"
+        android:label="fragment_sensor"
+        tools:layout="@layout/fragment_sensor" />
 
 </navigation>
