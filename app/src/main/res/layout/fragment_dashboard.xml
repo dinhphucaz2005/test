@@ -154,7 +154,7 @@
 
             <ImageView
                 android:id="@+id/imageView1"
-                android:layout_width="0dp"
+                android:layout_width="32dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_image"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -165,13 +165,14 @@
 
             <TextView
                 android:id="@+id/tv_image_selected"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="Ảnh / Video"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView1"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -186,7 +187,7 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="0dp"
+                android:layout_width="32dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_weight"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -197,13 +198,14 @@
 
             <TextView
                 android:id="@+id/tv_weight"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="Khối lượng"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -218,7 +220,7 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="0dp"
+                android:layout_width="32dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_clock"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -229,13 +231,14 @@
 
             <TextView
                 android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="Thời gian thu gom"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
@@ -251,7 +254,7 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="0dp"
+                android:layout_width="32dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_location"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -284,7 +287,7 @@
 
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="0dp"
+                android:layout_width="32dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_phone"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -295,13 +298,14 @@
 
             <TextView
                 android:id="@+id/tv_phone_number"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="Liên hệ"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />

@@ -89,7 +89,7 @@ public class Article {
         if (dateCollected == null) return "";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = new Date(dateCollected);
-        return "Ngày thu gom: " + sdf.format(date);
+        return sdf.format(date);
     }
 
     public void setDateCreated(Long dateCreated) {
