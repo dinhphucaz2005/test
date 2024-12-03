@@ -26,7 +26,11 @@
         android:id="@+id/giftFragment"
         android:name="com.example.test.staff.ui.notification.NotificationFragment"
         android:label="fragment_gift"
-        tools:layout="@layout/fragment_staff_notification" />
+        tools:layout="@layout/fragment_staff_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_notificationDetailFragment"
+            app:destination="@id/notificationDetailFragment3" />
+    </fragment>
 
     <fragment
         android:id="@+id/notifyFragment"
@@ -54,5 +58,9 @@
         android:name="com.example.test.staff.ui.calendar.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" />
+    <fragment
+        android:id="@+id/notificationDetailFragment3"
+        android:name="com.example.test.user.ui.notification.NotificationDetailFragment"
+        android:label="NotificationDetailFragment" />
 
 </navigation>

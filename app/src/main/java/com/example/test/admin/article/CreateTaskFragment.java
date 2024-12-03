@@ -78,7 +78,7 @@ public class CreateTaskFragment extends Fragment {
         binding.btnCreateTask.setOnClickListener(v -> {
             String title = binding.taskTitle.getText().toString();
             if (!title.isEmpty())
-                articleViewModel.createTask(title, articleId, binding.checkbox.isChecked(), message -> {
+                articleViewModel.createTask(title, articleId, false, message -> {
                     Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
                     articleViewModel.updateArticleStatus(articleId, ArticleStatus.DONE);
                     requireActivity().onBackPressed();
