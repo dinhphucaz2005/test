@@ -121,17 +121,23 @@ public class AppViewModel extends ViewModel {
 
         new Thread(() -> {
             // upload proof images
-            for (Uri uri : imageUris) {
+            List<String> urls = new ArrayList<>();
+            for (int i = 0; i < imageUris.size(); i++) {
+                Uri uri = imageUris.get(i);
                 StorageReference imageRef = storageReference.child("images/" + uri.getLastPathSegment());
 
+                int finalI = i;
                 imageRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
                     imageRef.getDownloadUrl().addOnSuccessListener(url -> {
-                        databaseReference
-                                .child(FirebaseKey.TASKS)
-                                .child(dateFormatted)
-                                .child(taskId)
-                                .child(FirebaseKey.PROOF_IMAGES)
-                                .push();
+                        urls.add(url.toString());
+                        if (finalI == imageUris.size() - 1) {
+                            databaseReference
+                                    .child(FirebaseKey.TASKS)
+                                    .child(dateFormatted)
+                                    .child(taskId)
+                                    .child(FirebaseKey.PROOF_IMAGES)
+                                    .setValue(urls);
+                        }
                     });
                 });
             }
@@ -139,6 +145,7 @@ public class AppViewModel extends ViewModel {
             // update task status
             databaseReference
                     .child(FirebaseKey.TASKS)
+                    .child(dateFormatted)
                     .child(taskId)
                     .child(FirebaseKey.TASKS_STATUS)
                     .setValue(TaskStatus.PENDING)
@@ -146,5 +153,28 @@ public class AppViewModel extends ViewModel {
         }).start();
 
 
+    }
+
+    public void cancelTask(String dateFormatted, String taskId, OnSuccessListener<String> listener) {
+        if (taskId == null) return;
+
+        databaseReference
+                .child(FirebaseKey.TASKS)
+                .child(dateFormatted)
+                .child(taskId)
+                .child(FirebaseKey.TASKS_STATUS)
+                .setValue(TaskStatus.CANCEL)
+                .addOnCompleteListener(task -> listener.onSuccess("Đã yêu cầu hủy việc thành công"));
+    }
+
+    public void acceptTask(String dateFormatted, String taskId, OnSuccessListener<String> listener) {
+        if (taskId == null) return;
+        databaseReference
+                .child(FirebaseKey.TASKS)
+                .child(dateFormatted)
+                .child(taskId)
+                .child(FirebaseKey.TASKS_STATUS)
+                .setValue(TaskStatus.DONE)
+                .addOnCompleteListener(task -> listener.onSuccess("Đồng ý xác nhận việc thành công"));
     }
 }

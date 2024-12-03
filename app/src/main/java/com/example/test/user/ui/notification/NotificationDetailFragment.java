@@ -1,4 +1,4 @@
-package com.example.test.staff.ui.calendar;
+package com.example.test.user.ui.notification;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -20,30 +20,32 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.test.AppViewModel;
+import com.example.test.R;
 import com.example.test.admin.article.ImageAdapter;
+import com.example.test.databinding.FragmentNotificationDetailBinding;
 import com.example.test.databinding.FragmentTaskDetailBinding;
 import com.example.test.model.Article;
 import com.example.test.model.Task;
 import com.example.test.model.TaskStatus;
+import com.example.test.staff.ui.calendar.CalendarViewModel;
+import com.example.test.staff.ui.calendar.TaskDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskDetailFragment extends Fragment {
+public class NotificationDetailFragment extends Fragment {
 
-    private FragmentTaskDetailBinding binding;
+    FragmentNotificationDetailBinding binding;
     private CalendarViewModel calendarViewModel;
     private AppViewModel appViewModel;
     private ImageAdapter imageAdapter;
-    private final List<Uri> imageUris = new ArrayList<>();
     String articleId;
     String taskId;
     String dateFormatted;
 
-    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentTaskDetailBinding.inflate(inflater, container, false);
+        binding = FragmentNotificationDetailBinding.inflate(inflater, container, false);
         calendarViewModel = new ViewModelProvider(requireActivity()).get(CalendarViewModel.class);
         appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
 
@@ -55,13 +57,14 @@ public class TaskDetailFragment extends Fragment {
             calendarViewModel.loadTask(dateFormatted, taskId, task -> {
                 if (task != null) {
                     if (task.getStatus().equals(TaskStatus.IN_PROGRESS)) {
-                        binding.proofLayout.setVisibility(View.VISIBLE);
-                        binding.proofLayoutPending.setVisibility(View.GONE);
+                        binding.proofBtnLayout.setVisibility(View.GONE);
                     } else {
-                        binding.proofLayout.setVisibility(View.GONE);
-                        binding.proofLayoutPending.setVisibility(View.VISIBLE);
+                        if (task.getStatus().equals(TaskStatus.PENDING)) {
+                            binding.proofBtnLayout.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.proofBtnLayout.setVisibility(View.GONE);
+                        }
                         if (task.getProofImages() != null && !task.getProofImages().isEmpty()) {
-                            binding.proofImg.setVisibility(View.VISIBLE);
                             Glide.with(binding.getRoot()).load(task.getProofImages().get(0)).centerCrop().into(binding.proofImgDone);
                         }
                         String statusText = "Chờ xác nhận";
@@ -85,47 +88,17 @@ public class TaskDetailFragment extends Fragment {
 
     private final int PICK_IMAGES_REQUEST = 0;
 
-    private void openImageSelector() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(intent, PICK_IMAGES_REQUEST);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGES_REQUEST && resultCode == RESULT_OK && data != null) {
-            List<Uri> selectedImages = getUris(data);
-            imageUris.addAll(selectedImages);
-        }
-    }
-
-    @NonNull
-    private static List<Uri> getUris(@NonNull Intent data) {
-        List<Uri> selectedImages = new ArrayList<>();
-
-        if (data.getClipData() != null) {
-            ClipData clipData = data.getClipData();
-            for (int i = 0; i < clipData.getItemCount(); i++) {
-                Uri imageUri = clipData.getItemAt(i).getUri();
-                selectedImages.add(imageUri);
-            }
-        } else if (data.getData() != null) {
-            Uri imageUri = data.getData();
-            selectedImages.add(imageUri);
-        }
-        return selectedImages;
-    }
 
     private void setEvents() {
 
-        binding.proofImg.setOnClickListener(v -> {
-            openImageSelector();
+        binding.btnCancel.setOnClickListener(v -> {
+            appViewModel.cancelTask(dateFormatted, taskId, message -> {
+                Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
+                requireActivity().onBackPressed();
+            });
         });
 
-        binding.btnSending.setOnClickListener(v -> appViewModel.requestAcceptTask(dateFormatted, taskId, imageUris, message -> {
+        binding.btnAccept.setOnClickListener(v -> appViewModel.acceptTask(dateFormatted, taskId, message -> {
             Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show();
             requireActivity().onBackPressed();
         }));

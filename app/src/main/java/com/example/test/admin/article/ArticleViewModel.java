@@ -70,7 +70,7 @@ public class ArticleViewModel extends ViewModel {
                 databaseReference.child(FirebaseKey.ARTICLES).child(articleId).setValue(article);
 
                 // send notification for staff
-                TaskNotification taskNotification = new TaskNotification(task.getId());
+                TaskNotification taskNotification = new TaskNotification(task.getId(), task.getArticleId());
 
                 taskNotification.setTaskId(task.getId());
                 taskNotification.setTitle("Nhiệm vụ mới vào ngày " + dateCollectFormatted);
@@ -84,7 +84,7 @@ public class ArticleViewModel extends ViewModel {
                         .setValue(taskNotification);
                 // send notification for user
 
-                TaskNotification taskNotificationUser = new TaskNotification(task.getId());
+                TaskNotification taskNotificationUser = new TaskNotification(task.getId(), task.getArticleId());
                 taskNotificationUser.setTitle("Bài đăng của bạn đã được duyệt và được thu thập vào ngày " + dateCollectFormatted);
                 taskNotificationUser.setDataCollectFormated(DateFormatted.get(task.getDateCollected()));
 

@@ -4,6 +4,18 @@ import androidx.annotation.NonNull;
 
 public class TaskNotification extends Notification {
     String taskId;
+    @NonNull
+    String articleId;
+
+
+    @NonNull
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(@NonNull String articleId) {
+        this.articleId = articleId;
+    }
 
     @NonNull
     public String getDataCollectFormated() {
@@ -25,15 +37,17 @@ public class TaskNotification extends Notification {
         this.taskId = taskId;
     }
 
-    public TaskNotification(String taskId) {
+    public TaskNotification(String taskId, @NonNull String articleId) {
         super();
         this.taskId = taskId;
+        this.articleId = articleId;
         dataCollectFormated = "";
     }
 
     public TaskNotification() {
         super();
-        this.taskId = "";
+        taskId = "";
+        articleId = "";
         dataCollectFormated = "";
     }
 }

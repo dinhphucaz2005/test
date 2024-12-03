@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
- <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -62,7 +62,7 @@
         android:id="@+id/navigation_location"
         android:name="com.example.test.user.ui.dashboard.LocationFragment"
         android:label="Location"
-        tools:layout="@layout/fragment_location" >
+        tools:layout="@layout/fragment_location">
         <action
             android:id="@+id/user_action_navigation_location_to_setOnMapFragment"
             app:destination="@id/setOnMapFragment" />
@@ -89,7 +89,7 @@
         android:id="@+id/notifyFragment2"
         android:name="com.example.test.staff.ui.chat.NotifyFragment"
         android:label="fragment_notify"
-        tools:layout="@layout/fragment_notify" >
+        tools:layout="@layout/fragment_notify">
         <action
             android:id="@+id/action_notifyFragment2_to_messageFragment3"
             app:destination="@id/messageFragment3" />
@@ -108,6 +108,15 @@
         android:id="@+id/notificationFragment"
         android:name="com.example.test.staff.ui.notification.NotificationFragment"
         android:label="fragment_staff_notification"
-        tools:layout="@layout/fragment_staff_notification" />
+        tools:layout="@layout/fragment_staff_notification">
+        <action
+            android:id="@+id/action_notificationFragment_to_notificationDetailFragment"
+            app:destination="@id/notificationDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationDetailFragment"
+        android:name="com.example.test.user.ui.notification.NotificationDetailFragment"
+        android:label="fragment_notification_detail"
+        tools:layout="@layout/fragment_notification_detail" />
 
 </navigation>
